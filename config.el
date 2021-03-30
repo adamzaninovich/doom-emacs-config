@@ -12,7 +12,6 @@
 
 ;; start maximized
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
-;; (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -25,9 +24,9 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 (setq
- doom-font (font-spec :family "FiraCode Nerd Font" :size 15 :style "Retina")
+ doom-font (font-spec :family "FiraCode Nerd Font" :size 14 :style "Retina")
  doom-big-font (font-spec :family "FiraCode Nerd Font" :size 20 :style "Retina")
- doom-variable-pitch-font (font-spec :family "Avenir Next" :size 15 :style "Regular"))
+ doom-variable-pitch-font (font-spec :family "Avenir Next" :size 14 :style "Regular"))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -53,10 +52,26 @@
 ;; Configuring some plugin settings
 (setq
  projectile-project-search-path '("~/projects/")
- centaur-tabs-style "rounded"
- centaur-tabs-set-bar 'none
- centaur-tabs-height 28
- )
+ treemacs-width 35
+ treemacs-follow-mode t
+ treemacs-position 'left)
+
+(after! centaur-tabs
+  (setq
+   centaur-tabs-style "wave"
+   centaur-tabs-set-bar 'none
+   centaur-tabs-height 28)
+  (centaur-tabs-change-fonts "Avenir Next" 140))
+
+;; Create a buffer-local hook to run elixir-format on save, only when we enable elixir-mode.
+(add-hook 'elixir-mode-hook
+          (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
+(add-hook 'elixir-format-hook (lambda ()
+                                (if (projectile-project-p)
+                                    (setq elixir-format-arguments
+                                          (list "--dot-formatter"
+                                                (concat (locate-dominating-file buffer-file-name ".formatter.exs") ".formatter.exs")))
+                                  (setq elixir-format-arguments nil))))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
