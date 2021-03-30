@@ -12,6 +12,7 @@
 
 ;; start maximized
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
+;; (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -23,26 +24,39 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "FiraCode Nerd Font"
-                           :size 14
-                           :style "Retina"))
+(setq
+ doom-font (font-spec :family "FiraCode Nerd Font" :size 15 :style "Retina")
+ doom-big-font (font-spec :family "FiraCode Nerd Font" :size 20 :style "Retina")
+ doom-variable-pitch-font (font-spec :family "Avenir Next" :size 15 :style "Regular"))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
+;; `load-theme' function.
+;; Some good themes:
+;; - doom-one (default)
+;; - doom-nord
+;; - doom-palenight
 (setq doom-theme 'doom-palenight)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (after! org
-  (setq org-directory "~/projects/org/")
-  (setq org-agenda-files '("~/projects/org/agenda.org" "~/projects/org/todo.org"))
-  (setq org-log-done 'time))
+  (setq
+   org-directory "~/projects/org/"
+   org-agenda-files '("~/projects/org/agenda.org" "~/projects/org/todo.org")
+   org-log-done 'time))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
 
+;; Configuring some plugin settings
+(setq
+ projectile-project-search-path '("~/projects/")
+ centaur-tabs-style "rounded"
+ centaur-tabs-set-bar 'none
+ centaur-tabs-height 28
+ )
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
