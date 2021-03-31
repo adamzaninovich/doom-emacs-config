@@ -3,6 +3,7 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
+;; Shhhhhhhhhhhhh
 (load! "secret.el")
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
@@ -26,7 +27,7 @@
 (setq
  doom-font (font-spec :family "FiraCode Nerd Font" :size 14 :style "Retina")
  doom-big-font (font-spec :family "FiraCode Nerd Font" :size 20 :style "Retina")
- doom-variable-pitch-font (font-spec :family "Avenir Next" :size 14 :style "Regular"))
+ doom-variable-pitch-font (font-spec :family "SF Pro" :size 14 :style "Regular"))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -51,7 +52,6 @@
 
 ;; Configuring some plugin settings
 (setq
- projectile-project-search-path '("~/projects/")
  treemacs-width 35
  treemacs-follow-mode t
  treemacs-position 'left)
@@ -61,7 +61,19 @@
    centaur-tabs-style "wave"
    centaur-tabs-set-bar 'none
    centaur-tabs-height 28)
-  (centaur-tabs-change-fonts "Avenir Next" 140))
+  (map! :desc "Next Tab" :g "S-}" #'centaur-tabs-forward)
+  (map! :desc "Previous Tab" :g "S-{" #'centaur-tabs-backward)
+  (centaur-tabs-change-fonts "SF Pro" 140))
+
+(after! projectile
+  (setq projectile-project-search-path '("~/projects/"))
+  ;; (map! :leader
+  ;;       :desc "Search in project" "p S" #'projectile-ripgrep)
+  )
+
+;; Make S and s work again
+(after! evil-snipe
+  (evil-snipe-mode -1))
 
 ;; Create a buffer-local hook to run elixir-format on save, only when we enable elixir-mode.
 (add-hook 'elixir-mode-hook
