@@ -3,6 +3,8 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
+(load! "functions.el")
+
 ;; Shhhhhhhhhhhhh
 (load! "secret.el")
 
@@ -10,6 +12,19 @@
 ;; clients, file templates and snippets.
 (setq user-full-name "Adam Zaninovich"
       user-mail-address my-gpg-email-address)
+
+;; Sets a random banner on startup
+(let* ((files '("~/.config/doom/banners/doom-cyan.png"
+                "~/.config/doom/banners/doom-grey.png"
+                "~/.config/doom/banners/doom-orange.png"
+                "~/.config/doom/banners/doom-purple.png"
+                "~/.config/doom/banners/doom-guy.png"
+                "~/.config/doom/banners/doom-doc.png"
+                "~/.config/doom/banners/doom-mess.png"
+                "~/.config/doom/banners/vim.png"))
+       (file (random-choice files)))
+  (setq +doom-dashboard-banner-file file))
+;; (setq +doom-dashboard-banner-padding '(2 . 3))
 
 ;; start maximized
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
