@@ -27,7 +27,7 @@
 (setq
  doom-font (font-spec :family "FiraCode Nerd Font" :size 14 :style "Retina")
  doom-big-font (font-spec :family "FiraCode Nerd Font" :size 20 :style "Retina")
- doom-variable-pitch-font (font-spec :family "SF Pro" :size 14 :style "Regular"))
+ doom-variable-pitch-font (font-spec :family "SF Pro" :size 14 :style "Medium"))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
