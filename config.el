@@ -61,8 +61,8 @@
    centaur-tabs-style "wave"
    centaur-tabs-set-bar 'none
    centaur-tabs-height 28)
-  (map! :desc "Next Tab" :g "S-}" #'centaur-tabs-forward)
-  (map! :desc "Previous Tab" :g "S-{" #'centaur-tabs-backward)
+  (map! :desc "Next Tab" :g "s-}" #'centaur-tabs-forward)
+  (map! :desc "Previous Tab" :g "s-{" #'centaur-tabs-backward)
   (centaur-tabs-change-fonts "SF Pro" 140))
 
 (after! projectile
