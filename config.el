@@ -5,7 +5,7 @@
 
 (load! "functions.el")
 
-;; Shhhhhhhhhhhhh
+;; Shhhhhhhhhhhhh (copy secret.example.el and fill in your email)
 (load! "secret.el")
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
