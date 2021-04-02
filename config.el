@@ -78,6 +78,8 @@
    centaur-tabs-height 28)
   (centaur-tabs-change-fonts "SF Pro" 140))
 
+(setq lsp-enable-file-watchers nil)
+
 (after! projectile
   (setq projectile-project-search-path '("~/projects/"))
   ;; use SPC / to search in project
