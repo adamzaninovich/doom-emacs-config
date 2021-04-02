@@ -76,12 +76,11 @@
    centaur-tabs-style "wave"
    centaur-tabs-set-bar 'none
    centaur-tabs-height 28)
-  (map! :desc "Next Tab" :g "s-}" #'centaur-tabs-forward)
-  (map! :desc "Previous Tab" :g "s-{" #'centaur-tabs-backward)
   (centaur-tabs-change-fonts "SF Pro" 140))
 
 (after! projectile
   (setq projectile-project-search-path '("~/projects/"))
+  ;; use SPC / to search in project
   ;; (map! :leader
   ;;       :desc "Search in project" "p S" #'projectile-ripgrep)
   )
@@ -99,6 +98,16 @@
                                           (list "--dot-formatter"
                                                 (concat (locate-dominating-file buffer-file-name ".formatter.exs") ".formatter.exs")))
                                   (setq elixir-format-arguments nil))))
+
+;; Key Bindings
+
+(map! :desc "Open Dired here" :n "-" #'dired-jump)
+
+(map! :desc "Next Tab" :g "s-}" #'centaur-tabs-forward)
+(map! :desc "Previous Tab" :g "s-{" #'centaur-tabs-backward)
+
+(map! :desc "Decrease current window width" :g "s-[" #'evil-window-decrease-width)
+(map! :desc "Increase current window width" :g "s-]" #'evil-window-increase-width)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
