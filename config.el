@@ -13,7 +13,7 @@
 (setq user-full-name "Adam Zaninovich"
       user-mail-address my-gpg-email-address)
 
-;; Sets a random banner on startup
+;; Sets a random banner on startup - requires random-choice from functions.el
 (let* ((files '("~/.config/doom/banners/doom-cyan.png"
                 "~/.config/doom/banners/doom-grey.png"
                 "~/.config/doom/banners/doom-orange.png"
@@ -24,7 +24,6 @@
                 "~/.config/doom/banners/vim.png"))
        (file (random-choice files)))
   (setq +doom-dashboard-banner-file file))
-;; (setq +doom-dashboard-banner-padding '(2 . 3))
 
 ;; start maximized
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
@@ -53,6 +52,19 @@
 ;; - doom-palenight
 (setq doom-theme 'doom-palenight)
 
+;; This determines the style of line numbers in effect. If set to `nil', line
+;; numbers are disabled. For relative line numbers, set this to `relative'.
+(setq display-line-numbers-type 'relative)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; PLUGIN CONFIG
+;;
+(setq
+ treemacs-width 35
+ treemacs-follow-mode t
+ treemacs-position 'left)
+
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (after! org
@@ -60,16 +72,6 @@
    org-directory "~/projects/org/"
    org-agenda-files '("~/projects/org/agenda.org" "~/projects/org/todo.org")
    org-log-done 'time))
-
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type 'relative)
-
-;; Configuring some plugin settings
-(setq
- treemacs-width 35
- treemacs-follow-mode t
- treemacs-position 'left)
 
 (after! centaur-tabs
   (setq
@@ -101,8 +103,10 @@
                                                 (concat (locate-dominating-file buffer-file-name ".formatter.exs") ".formatter.exs")))
                                   (setq elixir-format-arguments nil))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
 ;; Key Bindings
-
+;;
 (map! :desc "Open Dired here" :n "-" #'dired-jump)
 
 (map! :desc "Next Tab" :g "s-}" #'centaur-tabs-forward)
