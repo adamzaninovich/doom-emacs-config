@@ -74,7 +74,8 @@ I have turned off lsp file watching in [[file:config.el][config.el]] since I was
 A better way would be to figure out how to get it to ignore certain files (like node dependencies, for instance), but I haven't gotten around to that yet
 
 * Todo
-+ Configure Org Capture
++ Learn and Configure Org Capture
++ Learn and Configure Magit
 + Sync Google Calendar with Org Agenda
   - Two-way sync preferred
 
