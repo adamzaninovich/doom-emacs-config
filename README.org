@@ -19,6 +19,9 @@ This is my personal Doom Emacs configuration. I've been a vim and neovim user fo
 
 This configuration hopefully reflects that, and will continue to do so even more in the future as I whittle down Doom Emacs to a smaller feature set over time.
 
+#+ATTR_ORG: :width 400
+[[./doc/perfection.png]]
+
 ** Features
 Here are a few features of this configuration:
 
@@ -31,9 +34,6 @@ Here are a few features of this configuration:
 + Elixir Language Server support (requires additional setup)
   - I'm still debating the benefits of the full language server verses just using Alchemist which stil provides quite a bit more functionality than what I'm used to in my vim setup (which is basically only syntax highlighting and autoformatting).
 + Vim Vinegar style `-` keybinding to open Dired
-
-  #+ATTR_ORG: :width 400
-  [[./doc/perfection.png]]
 
 ** Maintainers
 + [[https://github.com/adamzaninovich][@adamzaninovich]] (Author)
