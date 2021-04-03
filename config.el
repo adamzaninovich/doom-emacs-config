@@ -3,6 +3,7 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
+;; Helpful stuff
 (load! "functions.el")
 
 ;; Shhhhhhhhhhhhh (copy secret.example.el and fill in your email)
@@ -13,19 +14,17 @@
 (setq user-full-name "Adam Zaninovich"
       user-mail-address my-gpg-email-address)
 
-;; Sets a random banner on startup - requires random-choice from functions.el
-(let* ((files '("~/.config/doom/banners/doom-cyan.png"
-                "~/.config/doom/banners/doom-grey.png"
-                "~/.config/doom/banners/doom-orange.png"
-                "~/.config/doom/banners/doom-purple.png"
-                "~/.config/doom/banners/doom-guy.png"
-                "~/.config/doom/banners/doom-doc.png"
-                "~/.config/doom/banners/doom-mess.png"
-                "~/.config/doom/banners/vim.png"))
-       (file (random-choice files)))
-  (setq +doom-dashboard-banner-file file))
+;; Sets a random banner on startup - requires choose-random-banner from functions.el
+(setq +doom-dashboard-banner-file (choose-random-banner '("doom-blue.png"   "doom-2-blue.png"   "doom-guy.png"
+                                                          "doom-grey.png"   "doom-2-grey.png"   "doom-doc.png"
+                                                          "doom-orange.png" "doom-2-orange.png" "doom-perfection.png"
+                                                          "doom-purple.png" "doom-2-purple.png" "vim.png")))
 
-;; start maximized
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; BASIC CONFIG
+;;
+;; Start maximized
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
