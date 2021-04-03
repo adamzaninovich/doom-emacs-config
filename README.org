@@ -11,13 +11,13 @@
 - [[#prerequisites][Prerequisites]]
   - [[#fonts][Fonts]]
   - [[#other][Other]]
-- [[#on-my-todo-list-02][On My Todo List]]
+- [[#todo][Todo]]
 - [[#troubleshooting][Troubleshooting]]
 
 * Description
 This is my personal Doom Emacs configuration. I've been a vim and neovim user for many years focusing on the core set of vim features with minimal use of plugins (yeah, I know, this is a big change).
 
-This configuration hopefully reflects that, and will continue to do so even more in the future as I whittle down Doom Emacs to a smaller feature set over time.
+This configuration hopefully reflects that at least a little bit, and will continue to do so even more in the future as I whittle down Doom Emacs to a smaller feature set over time.
 
 #+ATTR_ORG: :width 400
 [[./doc/perfection.png]]
@@ -51,9 +51,9 @@ Here are a few features of this configuration:
 ** Other
 + [[https://github.com/elixir-lsp/elixir-ls][Elixir LS]]
 
-* On My Todo List [0/2]
-+ [ ] Configure Org Capture
-+ [ ] Sync Google Calendar with Org Agenda
+* Todo
++ Configure Org Capture
++ Sync Google Calendar with Org Agenda
   - Two-way sync preferred
 
 * Troubleshooting
