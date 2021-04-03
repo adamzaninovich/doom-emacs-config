@@ -6,7 +6,6 @@
 * Table of Contents :TOC_2:noexport:
 - [[#description][Description]]
   - [[#features][Features]]
-  - [[#plugins-and-dependencies][Plugins and Dependencies]]
 - [[#prerequisites][Prerequisites]]
   - [[#fonts][Fonts]]
   - [[#setup-elixir-ls][Setup Elixir LS]]
@@ -36,10 +35,6 @@ Here are a few features of this configuration:
   - If you don't want to use the language server, simple change =(elixir +lsp)= to =elixir= in =init.el= and this will use [[https://github.com/tonini/alchemist.el][Alchemist]] instead
 + Vim Vinegar style =-= keybinding to open Dired
 
-** Plugins and Dependencies
-+ [[https://github.com/hlissner/doom-emacs][doom-emacs]] (obviously)
-+ [[https://github.com/elixir-lsp/elixir-ls][elixir-ls]]
-
 * Prerequisites
 ** Fonts
 + [[https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip][FiraCode Nerd Font]] (from [[https://www.nerdfonts.com/font-downloads][nerdfonts.com]])
@@ -48,36 +43,37 @@ Here are a few features of this configuration:
 
 ** Setup Elixir LS
 These steps are taken from [[https://dev.to/mariomazo/elixir-and-doom-emacs-m29][this blog post]]
-*** Install the language server
-#+begin_src shell
-git clone https://github.com/elixir-lsp/elixir-ls.git ~/.config/elixir-ls
-cd ~/.config/elixir-ls
-mix deps.get
-mix compile
-mix elixir_ls.release -o release
-#+end_src
-*** Add elixir-ls to your path
-Add elixir-ls to your =PATH=
-#+begin_src shell
-export PATH=$PATH:$HOME/.elixir-ls/release
-#+end_src
-*** Add your env variables to doom
-You need to add your environment to doom so that it has access to your path
-#+begin_src shell
-doom env
-#+end_src
-*** Activate lsp and elixir with lsp support
-In [[file:init.el][init.el]] make sure that =lsp= is active as well as elixir's lsp flag =(elixir +lsp)=
-*** Sync doom to install packages
-#+begin_src shell
-doom sync
-#+end_src
-*** restart emacs
-Open an elixir project and look for the 🚀 in your status bar
-If you need to troubleshoot, use =SPC b B= and open =*lsp-log*= to see any error messages
-*** additional config
-I have turned off lsp file watching in [[file:config.el][config.el]] since I was tired of it asking every time I opened a large project. Turn it back on if you want
-A better way would be to figure out how to get it to ignore certain files (like node dependencies, for instance), but I haven't gotten around to that yet
+
+1. Install the language server
+    #+begin_src shell
+    git clone https://github.com/elixir-lsp/elixir-ls.git ~/.config/elixir-ls
+    cd ~/.config/elixir-ls
+    mix deps.get
+    mix compile
+    mix elixir_ls.release -o release
+    #+end_src
+2. Add elixir-ls to your path
+    Add elixir-ls to your =PATH=
+    #+begin_src shell
+    export PATH=$PATH:$HOME/.elixir-ls/release
+    #+end_src
+3. Add your env variables to doom
+    You need to add your environment to doom so that it has access to your path
+    #+begin_src shell
+    doom env
+    #+end_src
+4. Activate lsp and elixir with lsp support
+    In [[file:init.el][init.el]] make sure that =lsp= is active as well as elixir's lsp flag =(elixir +lsp)=
+5. Sync doom to install packages
+    #+begin_src shell
+    doom sync
+    #+end_src
+6. restart emacs
+    Open an elixir project and look for the 🚀 in your status bar
+    If you need to troubleshoot, use =SPC b B= and open =*lsp-log*= to see any error messages
+7. additional config
+    I have turned off lsp file watching in [[file:config.el][config.el]] since I was tired of it asking every time I opened a large project. Turn it back on if you want
+    A better way would be to figure out how to get it to ignore certain files (like node dependencies, for instance), but I haven't gotten around to that yet
 
 * Todo
 + Configure Org Capture
