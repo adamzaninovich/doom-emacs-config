@@ -148,13 +148,13 @@
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
        (org                ; organize your plain life in plain text
-        +capture)          ; org-capture in and outside of Emacs
+        +capture          ; org-capture in and outside of Emacs
         ;; +attach         ; custom attachment system
-        ;; +babel          ; running code in org
+        +babel             ; running code in org
         ;; +export         ; Exporting org to whatever you want
         ;; +present        ; Emacs for presentations
         ;; +publish        ; Emacs+Org as a static site generator
-
+        )
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
