@@ -72,6 +72,15 @@
    org-agenda-files '("~/projects/org/agenda.org" "~/projects/org/todo.org")
    org-log-done 'time))
 
+;; Set Org Mode heading sizes
+(custom-set-faces
+  '(org-level-1 ((t (:inherit outline-1 :height 1.13))))
+  '(org-level-2 ((t (:inherit outline-2 :height 1.07))))
+  '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
+  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
+  '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
+)
+
 (after! centaur-tabs
   (setq
    centaur-tabs-style "wave"
@@ -79,6 +88,7 @@
    centaur-tabs-height 28)
   (centaur-tabs-change-fonts "SF Pro" 140))
 
+;; Do not watch files because it's annoying when it asks every time
 (setq lsp-enable-file-watchers nil)
 
 (after! projectile
