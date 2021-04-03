@@ -6,7 +6,6 @@
 * Table of Contents :TOC_3:noexport:
 - [[#description][Description]]
   - [[#features][Features]]
-  - [[#maintainers][Maintainers]]
   - [[#plugins-and-dependencies][Plugins and Dependencies]]
 - [[#prerequisites][Prerequisites]]
   - [[#fonts][Fonts]]
@@ -32,15 +31,13 @@ Here are a few features of this configuration:
 + Sets snipe mode to not override =S= and =s=
 + Elixir autoformatting
 + Elixir Language Server support
-  - This requires additional setup. I followed [[https://dev.to/mariomazo/elixir-and-doom-emacs-m29][this blog post]].
-  - I'm still debating the benefits of the full language server verses just using Alchemist which stil provides quite a bit more functionality than what I'm used to in my vim setup (which is basically only syntax highlighting and autoformatting).
+  - This requires additional setup, see [[#prerequisites][Prerequisites]] below
+  - I'm still debating the benefits of the full language server verses just using [[https://github.com/tonini/alchemist.el][Alchemist]] which still provides quite a bit more functionality than I'm used to in my vim setup (which is basically only syntax highlighting and autoformatting)
+  - If you don't want to use the language server, simple change =(elixir +lsp)= to =elixir= in =init.el= and this will use [[https://github.com/tonini/alchemist.el][Alchemist]] instead
 + Vim Vinegar style =-= keybinding to open Dired
 
-** Maintainers
-+ [[https://github.com/adamzaninovich][@adamzaninovich]] (Author)
-
 ** Plugins and Dependencies
-+ [[https://github.com/hlissner/doom-emacs][doom-emacs]]
++ [[https://github.com/hlissner/doom-emacs][doom-emacs]] (obviously)
 + [[https://github.com/elixir-lsp/elixir-ls][elixir-ls]]
 
 * Prerequisites
@@ -50,6 +47,7 @@ Here are a few features of this configuration:
 
 ** Other
 + [[https://github.com/elixir-lsp/elixir-ls][Elixir LS]]
+  - I followed [[https://dev.to/mariomazo/elixir-and-doom-emacs-m29][this blog post]] to setup Elixir LS with doom's =(elixir +lsp)= package
 
 * Todo
 + Configure Org Capture
