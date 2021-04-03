@@ -29,11 +29,11 @@ Here are a few features of this configuration:
 + Load private information from secrets file
 + Sets a random custom Doom Emacs banner at start
   - Pixelmator Pro template available on request
-+ Sets snipe mode to not override `S` and `s`
++ Sets snipe mode to not override =S= and =s=
 + Elixir autoformatting
 + Elixir Language Server support (requires additional setup)
   - I'm still debating the benefits of the full language server verses just using Alchemist which stil provides quite a bit more functionality than what I'm used to in my vim setup (which is basically only syntax highlighting and autoformatting).
-+ Vim Vinegar style `-` keybinding to open Dired
++ Vim Vinegar style =-= keybinding to open Dired
 
 ** Maintainers
 + [[https://github.com/adamzaninovich][@adamzaninovich]] (Author)
