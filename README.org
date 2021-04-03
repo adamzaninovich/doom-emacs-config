@@ -1,5 +1,4 @@
 #+TITLE:   Adam's Doom Emacs Configuration
-#+DATE:    April 3, 2021
 #+AUTHOR:  Adam Zaninovich
 #+STARTUP: inlineimages nofold
 
