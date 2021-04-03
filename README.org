@@ -1,0 +1,59 @@
+#+TITLE:   Adam's Doom Emacs Configuration
+#+DATE:    April 3, 2021
+#+AUTHOR:  Adam Zaninovich
+#+STARTUP: inlineimages nofold
+
+* Table of Contents :TOC_3:noexport:
+- [[#description][Description]]
+  - [[#features][Features]]
+  - [[#maintainers][Maintainers]]
+  - [[#plugins-and-dependencies][Plugins and Dependencies]]
+- [[#prerequisites][Prerequisites]]
+  - [[#fonts][Fonts]]
+  - [[#other][Other]]
+- [[#on-my-todo-list-02][On My Todo List]]
+- [[#troubleshooting][Troubleshooting]]
+
+* Description
+This is my personal Doom Emacs configuration. I've been a vim and neovim user for many years focusing on the core set of vim features with minimal use of plugins (yeah, I know, this is a big change).
+
+This configuration hopefully reflects that, and will continue to do so even more in the future as I whittle down Doom Emacs to a smaller feature set over time.
+
+** Features
+Here are a few features of this configuration:
+
++ Starts maximized but not fullscreen (macOS)
++ Load private information from secrets file
++ Sets a random custom Doom Emacs banner at start
+  - Pixelmator Pro template available on request
++ Sets snipe mode to not override `S` and `s`
++ Elixir autoformatting
++ Elixir Language Server support (requires additional setup)
+  - I'm still debating the benefits of the full language server verses just using Alchemist which stil provides quite a bit more functionality than what I'm used to in my vim setup (which is basically only syntax highlighting and autoformatting).
++ Vim Vinegar style `-` keybinding to open Dired
+
+  #+ATTR_ORG: :width 400
+  [[./doc/perfection.png]]
+
+** Maintainers
++ [[https://github.com/adamzaninovich][@adamzaninovich]] (Author)
+
+** Plugins and Dependencies
++ [[https://github.com/hlissner/doom-emacs][doom-emacs]]
++ [[https://github.com/elixir-lsp/elixir-ls][elixir-ls]]
+
+* Prerequisites
+** Fonts
++ [[https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip][FiraCode Nerd Font]] (from [[https://www.nerdfonts.com/font-downloads][nerdfonts.com]])
++ [[https://devimages-cdn.apple.com/design/resources/download/SF-Font-Pro.dmg][San Francisco Pro]] (from [[https://developer.apple.com/fonts/][Apple Developer Fonts]])
+
+** Other
++ [[https://github.com/elixir-lsp/elixir-ls][Elixir LS]]
+
+* On My Todo List [0/2]
++ [ ] Configure Org Capture
++ [ ] Sync Google Calendar with Org Agenda
+  - Two-way sync preferred
+
+* Troubleshooting
+🍀 Good luck!
