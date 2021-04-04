@@ -83,10 +83,10 @@
 
 (after! centaur-tabs
   (setq
-   centaur-tabs-style "wave"
+   centaur-tabs-style "bar"
    centaur-tabs-set-bar 'none
    centaur-tabs-height 28)
-  (centaur-tabs-change-fonts "SF Pro" 140))
+  (centaur-tabs-change-fonts "SF Pro" 130))
 
 ;; Do not watch files because it's annoying when it asks every time
 (setq lsp-enable-file-watchers nil)
