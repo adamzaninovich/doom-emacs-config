@@ -6,6 +6,7 @@
 - [[#description][Description]]
   - [[#features][Features]]
 - [[#prerequisites][Prerequisites]]
+  - [[#installing-emacs-on-macos-with-homebrew][Installing Emacs on macOS with Homebrew]]
   - [[#fonts][Fonts]]
   - [[#setup-elixir-ls][Setup Elixir LS]]
 - [[#todo][Todo]]
@@ -35,6 +36,19 @@ Here are a few features of this configuration:
 + Vim Vinegar style =-= keybinding to open Dired
 
 * Prerequisites
+** Installing Emacs on macOS with Homebrew
+*** Tap and install
+This may take a while to compile from source. You can see a list of available options and icons [[https://github.com/d12frosted/homebrew-emacs-plus#emacs-27-and-emacs-28-options][here]].
+#+begin_src shell
+brew tap d12frosted/emacs-plus
+brew install emacs-plus --with-nobu417-big-sur-icon
+#+end_src
+*** Copy Emacs to the Applications directory
+Your path may be different. You can link it instead, but Alfred will not see it unless you make a copy. Remember to copy it again if you upgrade emacs!
+#+begin_src shell
+cp -r /opt/homebrew/Cellar/emacs-plus@27/27.2/Emacs.app /Applications/.
+#+end_src
+
 ** Fonts
 + [[https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip][FiraCode Nerd Font]] (from [[https://www.nerdfonts.com/font-downloads][nerdfonts.com]])
 + [[https://devimages-cdn.apple.com/design/resources/download/SF-Font-Pro.dmg][San Francisco Pro]] (from [[https://developer.apple.com/fonts/][Apple Developer Fonts]])
