@@ -38,15 +38,15 @@ Here are a few features of this configuration:
 * Prerequisites
 ** Installing Emacs on macOS with Homebrew
 *** Tap and install
-This may take a while to compile from source. You can see a list of available options and icons [[https://github.com/d12frosted/homebrew-emacs-plus#emacs-27-and-emacs-28-options][here]].
+This may take a while to compile from source. By default this formula installs Emacs 27. I found that it had issues with screen flashes which I have not seen in version 28. Alternatively, you can always install emacs-mac instead. There is more information on the [[https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org#on-macos][doom emacs readme]]. You can see a list of available options and icons on the [[https://github.com/d12frosted/homebrew-emacs-plus#emacs-27-and-emacs-28-options][emacs-plus readme]].
 #+begin_src shell
 brew tap d12frosted/emacs-plus
-brew install emacs-plus --with-nobu417-big-sur-icon
+brew install emacs-plus@28 --with-nobu417-big-sur-icon
 #+end_src
 *** Copy Emacs to the Applications directory
 Your path may be different. You can link it instead, but Alfred will not see it unless you make a copy. Remember to copy it again if you upgrade emacs!
 #+begin_src shell
-cp -r /opt/homebrew/Cellar/emacs-plus@27/27.2/Emacs.app /Applications/.
+cp -r /opt/homebrew/opt/emacs-plus@28/Emacs.app /Applications
 #+end_src
 
 ** Fonts
