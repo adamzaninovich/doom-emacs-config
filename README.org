@@ -15,7 +15,7 @@
 * Description
 This is my personal Doom Emacs configuration. I've been a vim and neovim user for many years focusing on the core set of vim features with minimal use of plugins (yeah, I know, this is a big change).
 
-This configuration hopefully reflects that at least a little bit, and will continue to do so even more in the future as I whittle down Doom Emacs to a smaller feature set over time.
+This configuration should reflect that, at least a little bit, and will continue to do so even more in the future as I try to whittle down Doom Emacs to a smaller feature set over time.
 
 #+ATTR_ORG: :width 400
 [[./doc/perfection.png]]
