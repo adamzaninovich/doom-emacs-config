@@ -92,11 +92,7 @@
 (setq lsp-enable-file-watchers nil)
 
 (after! projectile
-  (setq projectile-project-search-path '("~/projects/"))
-  ;; use SPC / to search in project
-  ;; (map! :leader
-  ;;       :desc "Search in project" "p S" #'projectile-ripgrep)
-  )
+  (setq projectile-project-search-path '("~/projects/")))
 
 ;; Make S and s work again
 (after! evil-snipe
