@@ -95,8 +95,7 @@
   (setq projectile-project-search-path '("~/projects/")))
 
 ;; Make S and s work again
-(after! evil-snipe
-  (evil-snipe-mode -1))
+(after! evil-snipe (evil-snipe-mode -1))
 
 ;; Create a buffer-local hook to run elixir-format on save, only when we enable elixir-mode.
 (add-hook 'elixir-mode-hook
