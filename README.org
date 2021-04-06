@@ -23,17 +23,18 @@ This configuration should reflect that, at least a little bit, and will continue
 ** Features
 Here are a few features of this configuration:
 
-+ Starts maximized but not fullscreen (macOS)
-+ Load private information from secrets file
-+ Sets a random custom Doom Emacs banner at start
-  - Pixelmator Pro template available on request
-+ Sets snipe mode to not override =S= and =s=
-+ Elixir autoformatting
-+ Elixir Language Server support
-  - This requires additional setup, see [[#setup-elixir-ls][Setup Elixir LS]] below
-  - I'm still debating the benefits of the full language server verses just using [[https://github.com/tonini/alchemist.el][Alchemist]] which still provides quite a bit more functionality than I'm used to in my vim setup (which is basically only syntax highlighting and autoformatting)
-  - If you don't want to use the language server, simple change =(elixir +lsp)= to =elixir= in =init.el= and this will use [[https://github.com/tonini/alchemist.el][Alchemist]] instead
-+ Vim Vinegar style =-= keybinding to open Dired
+- Configured with a tangled Org mode file (~config.org~)
+- Starts maximized but not fullscreen (macOS)
+- Load private information from secrets file
+- Sets a random custom Doom Emacs banner at start
+  + Pixelmator Pro template available on request
+- Sets snipe mode to not override =S= and =s=
+- Elixir autoformatting
+- Elixir Language Server support
+  + This requires additional setup, see [[#setup-elixir-ls][Setup Elixir LS]] below
+  + I'm still debating the benefits of the full language server verses just using [[https://github.com/tonini/alchemist.el][Alchemist]] which still provides quite a bit more functionality than I'm used to in my vim setup (which is basically only syntax highlighting and autoformatting)
+  + If you don't want to use the language server, simple change ~(elixir +lsp)~ to ~elixir~ in ~init.el~ and this will use [[https://github.com/tonini/alchemist.el][Alchemist]] instead
+- Vim Vinegar style =-= keybinding to open Dired
 
 * Prerequisites
 ** Installing Emacs on macOS with Homebrew
@@ -100,7 +101,6 @@ A better way would be to figure out how to get it to ignore certain files (like 
 
 * Todo
 + Learn and Configure Org Capture
-+ Learn and Configure Magit
 + Sync Google Calendar with Org Agenda
   - Two-way sync preferred
 
