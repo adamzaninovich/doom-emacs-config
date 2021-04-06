@@ -97,6 +97,9 @@
 ;; Make S and s work again
 (after! evil-snipe (evil-snipe-mode -1))
 
+;; Don't move cursor back when exiting insert mode
+(setq evil-move-cursor-back nil)
+
 ;; Create a buffer-local hook to run elixir-format on save, only when we enable elixir-mode.
 (add-hook 'elixir-mode-hook
           (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
