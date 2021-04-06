@@ -232,12 +232,6 @@ Some good themes:
    org-agenda-files '("~/projects/org/agenda.org" "~/projects/org/todo.org")
    org-log-done 'time)
 
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((emacs-lisp . t)
-     (sh         . t)
-     (elixir     . t)))
-
   (add-to-list 'org-structure-template-alist '("el"  . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist '("sh"  . "src shell"))
   (add-to-list 'org-structure-template-alist '("iex" . "src elixir"))
