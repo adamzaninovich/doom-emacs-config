@@ -118,8 +118,6 @@ Don't move cursor back when exiting insert mode
 
 Setup some basic UI defaults
 
-TODO: run this after doom loads so that it's not overwritten
-
 - Start maximized
 - No minimal window chrome
 - Relative line numbers
@@ -129,11 +127,12 @@ TODO: run this after doom loads so that it's not overwritten
 
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-(tooltip-mode -1)
-(menu-bar-mode -1)
-(set-fringe-mode 15)
+(after! doom-ui
+  (scroll-bar-mode -1)
+  (tool-bar-mode -1)
+  (tooltip-mode -1)
+  (menu-bar-mode -1)
+  (set-fringe-mode 15))
 
 (setq display-line-numbers-type 'relative)
 
