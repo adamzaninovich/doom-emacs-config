@@ -1,10 +1,66 @@
+#+title:  My Doom Emacs Config
+#+author: Adam Zaninovich
+#+PROPERTY: header-args:emacs-lisp :tangle ./config.el
+
+Run this to update =config.el=
+#+begin_src emacs-lisp :results silent :tangle no
+(org-babel-tangle)
+#+end_src
+
+Write the header and warning to edit this file instead of config.el directly.
+
+#+begin_src emacs-lisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 ;;;
 ;;; WARNING: THIS FILE IS MANAGED BY `config.org'
 ;;; Please edit the configuration there and re-tangle
+#+end_src
+
+* Table of Contents :TOC_2:noexport:
+- [[#imports][Imports]]
+- [[#functions][Functions]]
+- [[#initial-setup][Initial Setup]]
+- [[#basic-functionality][Basic Functionality]]
+- [[#basic-ui-configuration][Basic UI Configuration]]
+  - [[#fonts][Fonts]]
+  - [[#theme][Theme]]
+- [[#plugin-config][Plugin Config]]
+  - [[#org-mode][Org Mode]]
+  - [[#treemacs][Treemacs]]
+  - [[#tabs][Tabs]]
+  - [[#lsp][LSP]]
+  - [[#projectile][Projectile]]
+  - [[#evil-snipe][Evil-Snipe]]
+  - [[#elixir][Elixir]]
+- [[#key-bindings][Key Bindings]]
+- [[#additional-information][Additional Information]]
+
+* Imports
+
+You will need to fill out a =secret.el= file for this config to work.
+
+If you'd like an example =secret.el= file to fill out, put your cursor on this code block and press C-c C-c to run it.
+#+begin_src shell :results output verbatim
+if [ ! -f secret.el ]; then
+    cp secret.example.el secret.el
+    echo "copied to secret.el, now go fill out the file"
+else
+    echo "secret.el already exists, make sure it has the correct information"
+fi
+#+end_src
+
+#+begin_src emacs-lisp
 
 ;; Shhhhhhhhhhhhh (copy secret.example.el and fill in your email)
 (load! "secret.el")
+
+#+end_src
+
+* Functions
+
+Helpful stuff
+
+#+begin_src emacs-lisp
 
 (defun choose-random-banner (files)
   (make-banner-path (random-choice files)))
@@ -17,6 +73,12 @@
   (let* ((size (length items))
          (index (random size)))
     (nth index items)))
+
+#+end_src
+
+* Initial Setup
+
+#+begin_src emacs-lisp
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
@@ -39,8 +101,22 @@
 
 (setq +doom-dashboard-banner-file (choose-random-banner my-banner-list))
 
+#+end_src
+
+* Basic Functionality
+
+#+begin_src emacs-lisp
+
 ;; Don't move cursor back when exiting insert mode
 (setq evil-move-cursor-back nil)
+
+#+end_src
+
+* Basic UI Configuration
+
+Setup some basic UI defaults
+
+#+begin_src emacs-lisp
 
 ;; Start maximized
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
@@ -62,12 +138,47 @@
                 shell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
+#+end_src
+
+** Fonts
+
+Doom exposes five (optional) variables for controlling fonts in Doom. Here are the three important ones:
+
++ ~doom-font~
++ ~doom-variable-pitch-font~
++ ~doom-big-font~ -- used for ~doom-big-font-mode~; use this for presentations or streaming.
+
+They all accept either a font-spec, font string ("Input Mono-12"), or xlfd font string.
+
+#+begin_src emacs-lisp
+
 (setq
  doom-font (font-spec :family "FiraCode Nerd Font" :size 14 :style "Retina")
  doom-big-font (font-spec :family "FiraCode Nerd Font" :size 20 :style "Retina")
  doom-variable-pitch-font (font-spec :family "SF Pro" :size 14 :style "Medium"))
 
+#+end_src
+
+** Theme
+
+There are two ways to load a theme. Both assume the theme is installed and available. You can either set ~doom-theme~ or manually load a theme with the ~load-theme~ function.
+
+Some good themes:
+- doom-one (default)
+- doom-nord
+- doom-palenight
+
+#+begin_src emacs-lisp
+
 (setq doom-theme 'doom-palenight)
+
+#+end_src
+
+* Plugin Config
+
+** Org Mode
+
+#+begin_src emacs-lisp
 
 (require 'org-tempo)
 
@@ -101,11 +212,22 @@
   (add-to-list 'org-structure-template-alist '("iex" . "src elixir"))
   )
 
+#+end_src
+
+** Treemacs
+
+#+begin_src emacs-lisp
+
 (setq
  treemacs-width 35
  treemacs-follow-mode t
  treemacs-position 'left)
 
+#+end_src
+
+** Tabs
+
+#+begin_src emacs-lisp
 (after! centaur-tabs
   (setq
    centaur-tabs-style "bar"
@@ -113,14 +235,41 @@
    centaur-tabs-height 28)
   (centaur-tabs-change-fonts "SF Pro" 130))
 
+#+end_src
+
+** LSP
+
+#+begin_src emacs-lisp
+
 ;; Do not watch files because it's annoying when it asks every time
 (setq lsp-enable-file-watchers nil)
 
+#+end_src
+
+** Projectile
+
+#+begin_src emacs-lisp
 (after! projectile
   (setq projectile-project-search-path '("~/projects/")))
 
+#+end_src
+
+** Evil-Snipe
+
+Disable evil-snipe mode so that S and s work as they do in vim
+
+#+begin_src emacs-lisp
+
 ;; Make S and s work again
 (after! evil-snipe (evil-snipe-mode -1))
+
+#+end_src
+
+** Elixir
+
+Autoformat Elixir code
+
+#+begin_src emacs-lisp
 
 ;; Create a buffer-local hook to run elixir-format on save, only when we enable elixir-mode.
 (add-hook 'elixir-mode-hook
@@ -132,6 +281,14 @@
                                                 (concat (locate-dominating-file buffer-file-name ".formatter.exs") ".formatter.exs")))
                                   (setq elixir-format-arguments nil))))
 
+#+end_src
+
+* Key Bindings
+
++ [ ] map ,, to C-6
+
+#+begin_src emacs-lisp
+
 (map! :desc "Open Dired here" :n "-" #'dired-jump)
 
 (map! :desc "Next Tab" :g "s-}" #'centaur-tabs-forward)
@@ -139,6 +296,12 @@
 
 (map! :desc "Decrease current window width" :g "s-[" #'evil-window-decrease-width)
 (map! :desc "Increase current window width" :g "s-]" #'evil-window-increase-width)
+
+#+end_src
+
+* Additional Information
+
+#+begin_src emacs-lisp
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -156,3 +319,5 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+#+end_src
