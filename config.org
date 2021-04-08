@@ -369,6 +369,7 @@ Set Centaur tabs visuals and font
   (setq
    centaur-tabs-style "bar"
    centaur-tabs-set-bar 'none
+   centaur-tabs-bar-height 30
    centaur-tabs-height 28)
 
   (centaur-tabs-change-fonts adam/variable-pitch-font-family 150)
