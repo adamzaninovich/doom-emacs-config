@@ -27,6 +27,7 @@ Write the header and warning to edit this file instead of config.el directly.
   - [[#auto-tangle-configuration-files][Auto-tangle Configuration Files]]
 - [[#plugin-config][Plugin Config]]
   - [[#doom-modeline][Doom Modeline]]
+  - [[#evil][EVIL]]
   - [[#magit][Magit]]
   - [[#flycheck][Flycheck]]
   - [[#treemacs][Treemacs]]
@@ -345,6 +346,16 @@ LF UTF-8 is the default file encoding, and thus not worth noting in the modeline
                 t)))
 
 (add-hook 'after-change-major-mode-hook #'adam/doom-modeline-conditional-buffer-encoding)
+
+#+end_src
+
+** EVIL
+
+I don’t use evil-escape-mode, so I may as well turn it off, I’ve heard it contributes a typing delay. I’m not sure it’s much, but it is an extra pre-command-hook that I don’t benefit from, so...
+
+#+begin_src emacs-lisp
+
+(after! evil-escape (evil-escape-mode -1))
 
 #+end_src
 
