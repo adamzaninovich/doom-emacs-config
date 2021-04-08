@@ -17,6 +17,7 @@ Write the header and warning to edit this file instead of config.el directly.
 - [[#imports][Imports]]
 - [[#functions][Functions]]
 - [[#initial-setup][Initial Setup]]
+  - [[#doom-banner][Doom Banner]]
 - [[#basic-functionality][Basic Functionality]]
 - [[#basic-ui-configuration][Basic UI Configuration]]
   - [[#fonts][Fonts]]
@@ -73,6 +74,7 @@ Helpful stuff
 #+begin_src emacs-lisp
 
 (defun me/random-choice (items)
+  "Returns a random item from a given list"
   (let* ((size (length items))
          (index (random size)))
     (nth index items)))
@@ -89,6 +91,8 @@ Some functionality uses this to identify you, e.g. GPG configuration, email clie
       user-mail-address my-gpg-email-address)
 
 #+end_src
+
+** Doom Banner
 
 Sets a random banner on startup - this will select a random banner from ~banners/*.png~
 
