@@ -72,14 +72,14 @@ Helpful stuff
 
 #+begin_src emacs-lisp
 
-(defun adam/choose-random-banner (files)
-  (adam/make-banner-path (adam/random-choice files)))
+(defun me/choose-random-banner (files)
+  (me/make-banner-path (me/random-choice files)))
 
-(defun adam/make-banner-path (file)
+(defun me/make-banner-path (file)
   (substitute-in-file-name
    (concat "$HOME/.config/doom/banners/" file)))
 
-(defun adam/random-choice (items)
+(defun me/random-choice (items)
   (let* ((size (length items))
          (index (random size)))
     (nth index items)))
@@ -101,7 +101,7 @@ Sets a random banner on startup - banners are stored in ~banners/~
 
 #+begin_src emacs-lisp
 
-(setq adam/banner-list '("doom-blue.png"
+(setq me/banner-list '("doom-blue.png"
                        "doom-2-blue.png"
                        "doom-guy.png"
                        "doom-grey.png"
@@ -114,7 +114,7 @@ Sets a random banner on startup - banners are stored in ~banners/~
                        "doom-2-purple.png"
                        "vim.png"))
 
-(setq +doom-dashboard-banner-file (adam/choose-random-banner adam/banner-list))
+(setq +doom-dashboard-banner-file (me/choose-random-banner me/banner-list))
 
 #+end_src
 
@@ -195,14 +195,14 @@ Download fonts
 
 #+begin_src emacs-lisp
 
-(setq adam/fixed-width-font-family "FiraCode Nerd Font"
-      adam/variable-pitch-font-family "Overpass")
-      ;; adam/variable-pitch-font-family "Myriad Pro")
+(setq me/fixed-width-font-family "FiraCode Nerd Font"
+      me/variable-pitch-font-family "Overpass")
+      ;; me/variable-pitch-font-family "Myriad Pro")
 
 (setq
- doom-font (font-spec :family adam/fixed-width-font-family :size 14 :style "Retina")
- doom-big-font (font-spec :family adam/fixed-width-font-family :size 20 :style "Retina")
- doom-variable-pitch-font (font-spec :family adam/variable-pitch-font-family :size 16 :style "Regular"))
+ doom-font (font-spec :family me/fixed-width-font-family :size 14 :style "Retina")
+ doom-big-font (font-spec :family me/fixed-width-font-family :size 20 :style "Retina")
+ doom-variable-pitch-font (font-spec :family me/variable-pitch-font-family :size 16 :style "Regular"))
 
 #+end_src
 
@@ -230,7 +230,7 @@ Some good themes:
 
 #+begin_src emacs-lisp
 
-(defun adam/org-font-setup ()
+(defun me/org-font-setup ()
   (font-lock-add-keywords 'org-mode
                           '(("^ *\\([-]\\) "
                              (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
@@ -243,7 +243,7 @@ Some good themes:
                   (org-level-6 . 1.0)
                   (org-level-7 . 1.0)
                   (org-level-8 . 1.0)))
-    (set-face-attribute (car face) nil :font adam/variable-pitch-font-family :weight 'Semibold :height (cdr face)))
+    (set-face-attribute (car face) nil :font me/variable-pitch-font-family :weight 'Semibold :height (cdr face)))
 
   (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
   (set-face-attribute 'org-table nil                 :inherit 'fixed-pitch)
@@ -278,7 +278,7 @@ Some good themes:
   (org-indent-mode)
   (variable-pitch-mode 1)
   (visual-line-mode 1)
-  (adam/org-font-setup))
+  (me/org-font-setup))
 
 #+end_src
 
@@ -286,13 +286,13 @@ Some good themes:
 
 #+begin_src emacs-lisp
 
-(defun adam/org-babel-tangle-config ()
+(defun me/org-babel-tangle-config ()
   (when (string-equal (buffer-file-name)
                       (expand-file-name "~/.config/doom/config.org"))
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
 
-(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'adam/org-babel-tangle-config)))
+(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'me/org-babel-tangle-config)))
 
 #+end_src
 
@@ -338,7 +338,7 @@ LF UTF-8 is the default file encoding, and thus not worth noting in the modeline
 
 #+begin_src emacs-lisp
 
-(defun adam/doom-modeline-conditional-buffer-encoding ()
+(defun me/doom-modeline-conditional-buffer-encoding ()
   "We expect the encoding to be LF UTF-8, so only show the modeline when this is not the case"
   (setq-local doom-modeline-buffer-encoding
               (unless (and (memq (plist-get (coding-system-plist buffer-file-coding-system) :category)
@@ -346,7 +346,7 @@ LF UTF-8 is the default file encoding, and thus not worth noting in the modeline
                            (not (memq (coding-system-eol-type buffer-file-coding-system) '(1 2))))
                 t)))
 
-(add-hook 'after-change-major-mode-hook #'adam/doom-modeline-conditional-buffer-encoding)
+(add-hook 'after-change-major-mode-hook #'me/doom-modeline-conditional-buffer-encoding)
 
 #+end_src
 
@@ -405,7 +405,7 @@ Set Centaur tabs visuals and font
    centaur-tabs-bar-height 30
    centaur-tabs-height 28)
 
-  (centaur-tabs-change-fonts adam/variable-pitch-font-family 150)
+  (centaur-tabs-change-fonts me/variable-pitch-font-family 150)
 
   (defun centaur-tabs-buffer-groups ()
     "`centaur-tabs-buffer-groups' control buffers' group rules.
