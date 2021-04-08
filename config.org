@@ -205,6 +205,12 @@ Doom exposes five (optional) variables for controlling fonts in Doom. Here are t
 
 They all accept either a font-spec, font string ("Input Mono-12"), or xlfd font string.
 
+Download fonts
++ [[https://github.com/adamzaninovich/fira-code-nerd-font-linux-mac-otf][FiraCode Nerd Font]]
++ [[https://overpassfont.org/][Overpass]]
++ [[https://www.cufonfonts.com/font/myriad-pro][Myriad Pro]]
++ [[https://developer.apple.com/fonts/][SF Pro]]
+
 #+begin_src emacs-lisp
 
 (setq adam/font-family "FiraCode Nerd Font"
