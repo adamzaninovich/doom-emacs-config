@@ -72,13 +72,6 @@ Helpful stuff
 
 #+begin_src emacs-lisp
 
-(defun me/choose-random-banner (files)
-  (me/make-banner-path (me/random-choice files)))
-
-(defun me/make-banner-path (file)
-  (substitute-in-file-name
-   (concat "$HOME/.config/doom/banners/" file)))
-
 (defun me/random-choice (items)
   (let* ((size (length items))
          (index (random size)))
@@ -97,24 +90,16 @@ Some functionality uses this to identify you, e.g. GPG configuration, email clie
 
 #+end_src
 
-Sets a random banner on startup - banners are stored in ~banners/~
+Sets a random banner on startup - this will select a random banner from ~banners/*.png~
 
 #+begin_src emacs-lisp
 
-(setq me/banner-list '("doom-blue.png"
-                       "doom-2-blue.png"
-                       "doom-guy.png"
-                       "doom-grey.png"
-                       "doom-2-grey.png"
-                       "doom-doc.png"
-                       "doom-orange.png"
-                       "doom-2-orange.png"
-                       "doom-perfection.png"
-                       "doom-purple.png"
-                       "doom-2-purple.png"
-                       "vim.png"))
-
-(setq +doom-dashboard-banner-file (me/choose-random-banner me/banner-list))
+(let* ((command "\\ls -A1d banners/*.png")
+       (output (shell-command-to-string command))
+       (banners (split-string output "\n" t))
+       (banner (me/random-choice banners))
+       (banner-file (substitute-in-file-name (concat "$HOME/.config/doom/" banner))))
+  (setq +doom-dashboard-banner-file banner-file))
 
 #+end_src
 
