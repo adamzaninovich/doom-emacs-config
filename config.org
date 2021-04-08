@@ -213,13 +213,13 @@ Download fonts
 
 #+begin_src emacs-lisp
 
-(setq adam/font-family "FiraCode Nerd Font"
+(setq adam/fixed-width-font-family "FiraCode Nerd Font"
       adam/variable-pitch-font-family "Overpass")
       ;; adam/variable-pitch-font-family "Myriad Pro")
 
 (setq
- doom-font (font-spec :family adam/font-family :size 14 :style "Retina")
- doom-big-font (font-spec :family adam/font-family :size 20 :style "Retina")
+ doom-font (font-spec :family adam/fixed-width-font-family :size 14 :style "Retina")
+ doom-big-font (font-spec :family adam/fixed-width-font-family :size 20 :style "Retina")
  doom-variable-pitch-font (font-spec :family adam/variable-pitch-font-family :size 16 :style "Regular"))
 
 #+end_src
