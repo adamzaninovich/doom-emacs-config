@@ -3,3 +3,4 @@ custom.el
 banners/doom\ logos.pxd/*
 config.el
 config-backup.el
+.DS_Store
