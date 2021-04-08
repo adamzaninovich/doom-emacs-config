@@ -10,7 +10,9 @@ Write the header and warning to edit this file instead of config.el directly.
 ;;;       in Emacs and `config.el' will be generated automatically!
 #+end_src
 
-* Table of Contents :TOC_3:noexport:
+* Table of Contents :TOC_2:noexport:
+- [[#todos][Todos]]
+  - [[#set-fringe-for-org-to-lots][Set fringe for org to lots]]
 - [[#imports][Imports]]
 - [[#functions][Functions]]
 - [[#initial-setup][Initial Setup]]
@@ -23,6 +25,9 @@ Write the header and warning to edit this file instead of config.el directly.
   - [[#basic-config][Basic Config]]
   - [[#auto-tangle-configuration-files][Auto-tangle Configuration Files]]
 - [[#plugin-config][Plugin Config]]
+  - [[#tramp][Tramp]]
+  - [[#doom-modeline][Doom Modeline]]
+  - [[#magit][Magit]]
   - [[#flycheck][Flycheck]]
   - [[#treemacs][Treemacs]]
   - [[#tabs][Tabs]]
@@ -31,7 +36,12 @@ Write the header and warning to edit this file instead of config.el directly.
   - [[#evil-snipe][Evil-Snipe]]
   - [[#elixir][Elixir]]
 - [[#key-bindings][Key Bindings]]
+  - [[#map--to-c-6][map =,,= to =C-6=]]
 - [[#additional-information][Additional Information]]
+
+* Todos
+** TODO Set fringe for org to lots
+*** alternatively, use that centered thing from system crafters
 
 * Imports
 
@@ -40,10 +50,10 @@ You will need to fill out a =secret.el= file for this config to work.
 If you'd like an example =secret.el= file to fill out, put your cursor on this code block and press =C-c C-c= to run it.
 #+begin_src shell :results output verbatim
 if [ ! -f secret.el ]; then
-    cp secret.example.el secret.el
-    echo "copied to secret.el, now go fill out the file"
+  cp secret.example.el secret.el
+  echo "copied to secret.el, now go fill out the file"
 else
-    echo "secret.el already exists, make sure it has the correct information"
+  echo "secret.el already exists, make sure it has the correct information"
 fi
 #+end_src
 
@@ -52,6 +62,7 @@ fi
 (load! "secret.el")
 
 #+end_src
+
 * Functions
 
 Helpful stuff
@@ -105,6 +116,39 @@ Sets a random banner on startup - banners are stored in ~banners/~
 #+end_src
 
 * Basic Functionality
+
+Set some sensible defaults
+
+#+begin_src emacs-lisp
+
+(setq-default delete-by-moving-to-trash t
+              window-combination-resize t
+              x-stretch-cursor t)
+
+(setq undo-limit 80000000
+      evil-want-fine-undo t
+      auto-save-default t
+      truncate-string-ellipsis "…")
+
+#+end_src
+
+Display the current time in the mode-line
+
+#+begin_src emacs-lisp
+
+(display-time-mode 1)
+
+#+end_src
+
+If there is a battery, as in, on a laptop, then display it in the mode-line
+
+#+begin_src emacs-lisp
+
+(if (equal "Batter status not available"
+           (battery))
+    (display-battery-mode 1))
+
+#+end_src
 
 Don't move cursor back when exiting insert mode
 
@@ -164,7 +208,8 @@ They all accept either a font-spec, font string ("Input Mono-12"), or xlfd font 
 #+begin_src emacs-lisp
 
 (setq adam/font-family "FiraCode Nerd Font"
-      adam/variable-pitch-font-family "Myriad Pro")
+      adam/variable-pitch-font-family "Overpass")
+      ;; adam/variable-pitch-font-family "Myriad Pro")
 
 (setq
  doom-font (font-spec :family adam/font-family :size 14 :style "Retina")
@@ -189,7 +234,6 @@ Some good themes:
 #+end_src
 
 * Org Mode
-
 ** Better font faces
 
 - Replace list hyphen with dot
@@ -265,8 +309,39 @@ Some good themes:
 #+end_src
 
 * Plugin Config
+** TODO Tramp
+
+#+begin_src emacs-lisp
+
+(setq tramp-default-method "ssh")
+
+#+end_src
+
+** Doom Modeline
+
+#+begin_src emacs-lisp
+
+(after! doom-modeline
+  (setq
+   doom-modeline-major-mode-icon t
+   doom-modeline-height 35
+   doom-modeline-buffer-encoding nil
+   doom-modeline-persp-name t))
+
+#+end_src
+
+** Magit
+
+#+BEGIN_SRC emacs-lisp
+
+(setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     "))
+
+#+END_SRC
 
 ** Flycheck
+
+Turns off proselint because it complains when I cuss
+
 #+begin_src emacs-lisp
 
 (setq-default flycheck-disabled-checkers '(proselint))
@@ -298,20 +373,52 @@ Set Centaur tabs visuals and font
    centaur-tabs-style "bar"
    centaur-tabs-set-bar 'none
    centaur-tabs-height 28)
-  (centaur-tabs-change-fonts adam/variable-pitch-font-family 150))
+
+  (centaur-tabs-change-fonts adam/variable-pitch-font-family 150)
+
+  (defun centaur-tabs-buffer-groups ()
+    "`centaur-tabs-buffer-groups' control buffers' group rules.
+
+    Group centaur-tabs with mode if buffer is derived from `eshell-mode'
+    `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
+    All buffer name start with * will group to \"Emacs\".
+    Other buffer group by `centaur-tabs-get-group-name' with project name."
+    (list
+     (cond
+      ((or (string-equal "*" (substring (buffer-name) 0 1))
+           (memq major-mode '(magit-process-mode
+                              magit-status-mode
+                              magit-diff-mode
+                              magit-log-mode
+                              magit-file-mode
+                              magit-blob-mode
+                              magit-blame-mode
+                              )))
+       "Emacs")
+      ((derived-mode-p 'eshell-mode)
+       "EShell")
+      ((derived-mode-p 'emacs-lisp-mode)
+       "Elisp")
+      ((derived-mode-p 'dired-mode)
+       "Dired")
+      ;; ((memq major-mode '(org-mode org-agenda-mode diary-mode)) "OrgMode")
+      (t
+       (centaur-tabs-get-group-name (current-buffer))))))
+  )
 
 #+end_src
 
 ** LSP
 
 Do not watch files because it's annoying when it asks every time
-TODO: Figure out how to ignore certain files so that it can watch a reasonable amount of files without asking or slowing things down.
 
 #+begin_src emacs-lisp
 
 (setq lsp-enable-file-watchers nil)
 
 #+end_src
+
+*** TODO Figure out how to make LSP ignore certain files so that it can watch a reasonable amount of files without asking or slowing things down
 
 ** Projectile
 
@@ -353,9 +460,6 @@ Create a buffer-local hook to run elixir-format on save, only when we enable eli
 
 * Key Bindings
 
-- Todo
-  + [ ] map =,,= to =C-6=
-
 #+begin_src emacs-lisp
 
 (map! :desc "Open Dired here" :n "-" #'dired-jump)
@@ -367,6 +471,8 @@ Create a buffer-local hook to run elixir-format on save, only when we enable eli
 (map! :desc "Increase current window width" :g "s-]" #'evil-window-increase-width)
 
 #+end_src
+
+** TODO map =,,= to =C-6=
 
 * Additional Information
 
