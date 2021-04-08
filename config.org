@@ -98,12 +98,12 @@ Sets a random banner on startup - this will select a random banner from ~banners
 
 #+begin_src emacs-lisp
 
-(let* ((command "\\ls -A1d banners/*.png")
+(let* ((banner-path (substitute-in-file-name "$HOME/.config/doom/banners"))
+       (command (concat "\\ls -A1d " banner-path "/*.png"))
        (output (shell-command-to-string command))
        (banners (split-string output "\n" t))
-       (banner (me/random-choice banners))
-       (banner-file (substitute-in-file-name (concat "$HOME/.config/doom/" banner))))
-  (setq +doom-dashboard-banner-file banner-file))
+       (banner (me/random-choice banners)))
+  (setq +doom-dashboard-banner-file banner))
 
 #+end_src
 
