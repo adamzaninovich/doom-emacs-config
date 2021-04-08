@@ -149,7 +149,6 @@ Setup some basic UI defaults
 - Start maximized
 - No minimal window chrome
 - Relative line numbers
-- No Numbers in Org more and terminals
 
 #+begin_src emacs-lisp
 
@@ -159,8 +158,7 @@ Setup some basic UI defaults
   (scroll-bar-mode -1)
   (tool-bar-mode -1)
   (tooltip-mode -1)
-  (menu-bar-mode -1)
-  (set-fringe-mode 15))
+  (menu-bar-mode -1))
 
 (setq display-line-numbers-type 'relative)
 
@@ -258,7 +256,7 @@ CLOSED: [2021-04-08 Thu 10:45]
 + use variable pitch fonts in org mode
 + better text wrapping
 + setup fonts
-+ no line numbers and large fringe
++ no line numbers
 
 #+begin_src emacs-lisp
 
