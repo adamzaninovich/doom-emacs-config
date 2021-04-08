@@ -329,6 +329,7 @@ If there is a battery, as in, on a laptop, then display it in the modeline
 
 (if (equal "Battery status not available"
            (battery))
+    (display-battery-mode 0)
     (display-battery-mode 1))
 
 #+end_src
