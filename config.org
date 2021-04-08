@@ -312,9 +312,12 @@ Some good themes:
 
 #+end_src
 
-Display the current time in the modeline
+Display the current time in the modeline (without date or load average)
 
 #+begin_src emacs-lisp
+
+(setq display-time-day-and-date nil
+      display-time-default-load-average nil)
 
 (display-time-mode 1)
 
