@@ -134,24 +134,6 @@ Set some sensible defaults
 
 #+end_src
 
-Display the current time in the mode-line
-
-#+begin_src emacs-lisp
-
-(display-time-mode 1)
-
-#+end_src
-
-If there is a battery, as in, on a laptop, then display it in the mode-line
-
-#+begin_src emacs-lisp
-
-(if (equal "Batter status not available"
-           (battery))
-    (display-battery-mode 1))
-
-#+end_src
-
 Don't move cursor back when exiting insert mode
 
 #+begin_src emacs-lisp
@@ -318,6 +300,9 @@ Some good themes:
 
 * Plugin Config
 ** Doom Modeline
++ show mode icons
++ make the modeline /slightly/ taller
++ show the project name in the modeline
 
 #+begin_src emacs-lisp
 
@@ -325,8 +310,41 @@ Some good themes:
   (setq
    doom-modeline-major-mode-icon t
    doom-modeline-height 35
-   doom-modeline-buffer-encoding nil
    doom-modeline-persp-name t))
+
+#+end_src
+
+Display the current time in the modeline
+
+#+begin_src emacs-lisp
+
+(display-time-mode 1)
+
+#+end_src
+
+If there is a battery, as in, on a laptop, then display it in the modeline
+
+#+begin_src emacs-lisp
+
+(if (equal "Battery status not available"
+           (battery))
+    (display-battery-mode 1))
+
+#+end_src
+
+LF UTF-8 is the default file encoding, and thus not worth noting in the modeline. So, let’s conditionally hide it and only show the encoding when it's different
+
+#+begin_src emacs-lisp
+
+(defun adam/doom-modeline-conditional-buffer-encoding ()
+  "We expect the encoding to be LF UTF-8, so only show the modeline when this is not the case"
+  (setq-local doom-modeline-buffer-encoding
+              (unless (and (memq (plist-get (coding-system-plist buffer-file-coding-system) :category)
+                                 '(coding-category-undecided coding-category-utf-8))
+                           (not (memq (coding-system-eol-type buffer-file-coding-system) '(1 2))))
+                t)))
+
+(add-hook 'after-change-major-mode-hook #'adam/doom-modeline-conditional-buffer-encoding)
 
 #+end_src
 
