@@ -164,8 +164,6 @@ Setup some basic UI defaults
 
 (setq display-line-numbers-type 'relative)
 
-(add-hook 'org-mode-hook (lambda () (display-line-numbers-mode 0)))
-
 #+end_src
 
 ** Fonts
@@ -252,6 +250,16 @@ Some good themes:
 
 ** Basic Config
 
++ set org directory and agenda files
++ DONE add timestamp when finished
+CLOSED: [2021-04-08 Thu 10:45]
++ add some org templates (try =<el= =TAB= in insert mode)
++ indent text according to outline structure
++ use variable pitch fonts in org mode
++ better text wrapping
++ setup fonts
++ no line numbers and large fringe
+
 #+begin_src emacs-lisp
 
 (require 'org-tempo)
@@ -266,10 +274,14 @@ Some good themes:
   (add-to-list 'org-structure-template-alist '("sh"  . "src shell"))
   (add-to-list 'org-structure-template-alist '("iex" . "src elixir"))
 
-  (org-indent-mode)
+  (org-indent-mode 1)
   (variable-pitch-mode 1)
   (visual-line-mode 1)
   (me/org-font-setup))
+
+(add-hook 'org-mode-hook (lambda ()
+                           (display-line-numbers-mode 0)
+                           (set-fringe-mode 50)))
 
 #+end_src
 
