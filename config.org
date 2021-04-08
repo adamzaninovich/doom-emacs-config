@@ -313,7 +313,7 @@ Some good themes:
 
 #+begin_src emacs-lisp
 
-(setq tramp-default-method "ssh")
+;; (setq tramp-default-method "ssh")
 
 #+end_src
 
