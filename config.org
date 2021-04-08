@@ -114,6 +114,14 @@ Don't move cursor back when exiting insert mode
 
 #+end_src
 
+Turn on Auto Revert Mode globally. This will automatically refresh the buffer when the file changes on disk (either through externaledits or something like a git branch change). The buffer will NOT revert if you have unsaved changes.
+
+#+begin_src emacs-lisp
+
+(global-auto-revert-mode t)
+
+#+end_src
+
 * Basic UI Configuration
 
 Setup some basic UI defaults
