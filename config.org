@@ -337,7 +337,7 @@ Some good themes:
 
 ** Flycheck
 
-Turns off proselint because it complains when I cuss
+Turns off proselint because it complains when I cuss and we can't have that
 
 #+begin_src emacs-lisp
 
