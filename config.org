@@ -23,6 +23,7 @@ Write the header and warning to edit this file instead of config.el directly.
   - [[#basic-config][Basic Config]]
   - [[#auto-tangle-configuration-files][Auto-tangle Configuration Files]]
 - [[#plugin-config][Plugin Config]]
+  - [[#flycheck][Flycheck]]
   - [[#treemacs][Treemacs]]
   - [[#tabs][Tabs]]
   - [[#lsp][LSP]]
@@ -265,6 +266,13 @@ Some good themes:
 #+end_src
 
 * Plugin Config
+
+** Flycheck
+#+begin_src emacs-lisp
+
+(setq-default flycheck-disabled-checkers '(proselint))
+
+#+end_src
 
 ** Treemacs
 
