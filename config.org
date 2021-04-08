@@ -12,7 +12,7 @@ Write the header and warning to edit this file instead of config.el directly.
 
 * Table of Contents :TOC_2:noexport:
 - [[#todos][Todos]]
-  - [[#no-map--to-c-6][NO map =,,= to =C-6=]]
+  - [[#map--to-c-6][map =,,= to =C-6=]]
   - [[#set-fringe-for-org-to-lots][Set fringe for org to lots]]
 - [[#imports][Imports]]
 - [[#functions][Functions]]
@@ -41,11 +41,12 @@ Write the header and warning to edit this file instead of config.el directly.
 - [[#additional-information][Additional Information]]
 
 * Todos
-** NO map =,,= to =C-6=
+** DONE map =,,= to =C-6=
 CLOSED: [2021-04-08 Thu 10:20]
 *** use =SPC b l= instead
 *** for switching back to the last buffer
-** TODO Set fringe for org to lots
+** DONE Set fringe for org to lots
+CLOSED: [2021-04-08 Thu 11:26]
 *** alternatively, use that centered thing from system crafters
 *** for now, zen (=SPC t z=) kind of works for this, but I still want to figure out the centered thing
 
