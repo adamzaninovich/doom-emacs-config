@@ -188,7 +188,7 @@ Doom exposes five (optional) variables for controlling fonts in Doom. Here are t
 They all accept either a font-spec, font string ("Input Mono-12"), or xlfd font string.
 
 Download fonts
-+ [[https://github.com/adamzaninovich/fira-code-nerd-font-linux-mac-otf][FiraCode Nerd Font]] (My own version)
++ [[https://github.com/adamzaninovich/fira-code-nerd-font-linux-mac-otf][FiraCode Nerd Font]] (This is my own version, but you can also get it from [[https://www.nerdfonts.com/][nerdfonts.com]])
 + [[https://overpassfont.org/][Overpass]] (It's pretty ¯\_(ツ)_/¯)
 + [[https://www.cufonfonts.com/font/myriad-pro][Myriad Pro]] (A proprietary Adobe font from a shady Turkish website, what could go wrong?)
 + [[https://developer.apple.com/fonts/][SF Pro]] (Default system font in macOS that for some reason you have to download to use yourself)
