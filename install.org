@@ -181,6 +181,7 @@ else
   ohai "Emacs is not installed. Let's install it before continuing"
   if confirm_y "Install Emacs Plus 28?"; then
     install_emacs="yes"
+  else
     abort "You must install Emacs before continuing. Install it manually or run this program again."
   fi
 fi
