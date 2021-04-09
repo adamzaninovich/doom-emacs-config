@@ -186,9 +186,7 @@ else
 fi
 
 if confirm_y "Install DOOM?"; then
-
   ohai "Installing DOOM"
-
   emacs_config="$HOME/.emacs.d"
 
   if [ -d "$emacs_config" ]; then
@@ -206,7 +204,6 @@ if confirm_y "Install DOOM?"; then
   "${emacs_config}/bin/doom" env
 
   unset emacs_config
-
 else
   ohai "Skipping DOOM"
   ohai "Skipping DOOM?"
@@ -231,3 +228,5 @@ echo "  ${tty_yellow}doom doctor${tty_reset}"
 echo
 echo "After that, open Emacs.app in your Applications folder and you're good to go!"
 echo "  Enjoy! - Adam"
+
+unset elixir_ls_installed
