@@ -183,7 +183,6 @@ else
     ohai "Ok, there are instructions in ${tty_yellow}readme.org${tty_reset} if you change your mind"
     ohai "Skipping Elixir LS"
   fi
-
 fi
 
 if confirm_y "Install DOOM?"; then
