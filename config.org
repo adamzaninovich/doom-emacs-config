@@ -272,7 +272,7 @@ CLOSED: [2021-04-08 Thu 10:45]
    org-log-done 'time)
 
   (add-to-list 'org-structure-template-alist '("el"  . "src emacs-lisp"))
-  (add-to-list 'org-structure-template-alist '("sh"  . "src shell"))
+  (add-to-list 'org-structure-template-alist '("sh"  . "src sh"))
   (add-to-list 'org-structure-template-alist '("iex" . "src elixir"))
 
   (org-indent-mode 1)
@@ -289,8 +289,9 @@ CLOSED: [2021-04-08 Thu 10:45]
 #+begin_src emacs-lisp
 
 (defun me/org-babel-tangle-config ()
-  (when (string-equal (buffer-file-name)
-                      (expand-file-name "~/.config/doom/config.org"))
+  (when (member (buffer-file-name)
+                (list (expand-file-name "~/.config/doom/config.org")
+                      (expand-file-name "~/.config/doom/install.org")))
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
 
@@ -398,6 +399,14 @@ Set Treemacs visual config and theme
 
 Set Centaur tabs visuals and font
 
+Also, make most tabs group by project not by org or elisp modes
+
+Sets up tab grouping by:
++ *star buffers and magit buffers
++ EShell buffers
++ Dired buffers
++ Everything else is grouped by project
+
 #+begin_src emacs-lisp
 
 (after! centaur-tabs
@@ -450,12 +459,16 @@ Do not watch files because it's annoying when it asks every time
 
 ** Projectile
 
-Set Projectile project search path. Refresh projects with ~M-x projectile-discover-projects-in-search-path~.
+Set projectile ignored projects
+Set Projectile project search path
+
+Refresh projects with ~M-x projectile-discover-projects-in-search-path~.
 
 #+begin_src emacs-lisp
 
 (after! projectile
-  (setq projectile-project-search-path '("~/projects/")))
+  (setq projectile-ignored-projects '("~/" "/tmp/" "~/.emacs.d/" "/opt/homebrew/"))
+  (setq projectile-project-search-path '("~/projects/" "~/campaigns/")))
 
 #+end_src
 
