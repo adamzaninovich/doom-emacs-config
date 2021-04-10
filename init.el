@@ -27,7 +27,6 @@
        (ivy                ; a search engine for love and life
         +icons
         +childframe)
-       ;; ripgrep ; maybe?
 
        :ui
        ;;deft              ; notational velocity for Emacs
