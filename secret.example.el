@@ -1,3 +1,4 @@
 ;;; secret.el -*- lexical-binding: t; -*-
 
-(setq my-gpg-email-address "some-email@example.com")
+(setq me/full-name "My Name"
+      me/mail-address "some-email@example.com")

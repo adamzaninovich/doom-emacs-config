@@ -124,6 +124,10 @@ else
   bullet "Installed stylelint with npm"
   cmd_missing js-beautify && npm -g --silent install js-beautify > "/dev/null" 2>&1
   bullet "Installed js-beautify with npm"
+  if ! cmd_missing asdf; then
+    ohai "Reshimming asdf shims"
+    asdf reshim
+  fi
 fi
 
 install_emacs="no"
@@ -229,12 +233,17 @@ if confirm_y "Install DOOM?"; then
   "${emacs_config}/bin/doom" install
   "${emacs_config}/bin/doom" env
 
+  export PATH="$PATH:${emacs_config}/bin"
+
   unset emacs_config
 else
   ohai "Skipping DOOM"
   ohai "Skipping DOOM?"
   ohai "Skipping DOOM ¯\_(ツ)_/¯"
 fi
+
+cp secret.example.el secret.el
+ohai "Created $HOME/.config/doom/secrets.el"
 
 ohai "Notes"
 echo
@@ -251,6 +260,8 @@ if [ "$elixir_ls_installed" = "yes" ]; then
 fi
 echo "Also, now would be a great time to run"
 echo "  ${tty_yellow}doom doctor${tty_reset}"
+echo
+echo "Finally, you should edit $HOME/.config/doom/secrets.el and add your name and email"
 echo
 echo "After that, open Emacs.app in your Applications folder and you're good to go!"
 echo "  Enjoy! - Adam"

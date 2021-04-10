@@ -92,8 +92,8 @@ Some functionality uses this to identify you, e.g. GPG configuration, email clie
 
 #+begin_src emacs-lisp
 
-(setq user-full-name "Adam Zaninovich"
-      user-mail-address my-gpg-email-address)
+(setq user-full-name me/full-name
+      user-mail-address me/mail-address)
 
 #+end_src
 

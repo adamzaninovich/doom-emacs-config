@@ -11,8 +11,8 @@
          (index (random size)))
     (nth index items)))
 
-(setq user-full-name "Adam Zaninovich"
-      user-mail-address my-gpg-email-address)
+(setq user-full-name me/full-name
+      user-mail-address me/mail-address)
 
 (let* ((banner-directory (substitute-in-file-name "$HOME/.config/doom/banners"))
        (command (concat "\\ls -A1d " banner-directory "/*.png"))
