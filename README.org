@@ -5,6 +5,7 @@
 * Table of Contents :TOC_2:noexport:
 - [[#description][Description]]
   - [[#features][Features]]
+- [[#installer][Installer]]
 - [[#prerequisites][Prerequisites]]
   - [[#installing-emacs-on-macos-with-homebrew][Installing Emacs on macOS with Homebrew]]
   - [[#fonts][Fonts]]
@@ -13,6 +14,7 @@
 - [[#troubleshooting][Troubleshooting]]
 
 * Description
+
 This is my personal Doom Emacs configuration. I've been a vim and neovim user for many years focusing on the core set of vim features with minimal use of plugins (yeah, I know, this is a big change).
 
 This configuration should reflect that, at least a little bit, and will continue to do so even more in the future as I try to whittle down Doom Emacs to a smaller feature set over time.
@@ -35,8 +37,14 @@ Here are a few features of this configuration:
   + I'm still debating the benefits of the full language server verses just using [[https://github.com/tonini/alchemist.el][Alchemist]] which still provides quite a bit more functionality than I'm used to in my vim setup (which is basically only syntax highlighting and autoformatting)
   + If you don't want to use the language server, simple change ~(elixir +lsp)~ to ~elixir~ in ~init.el~ and this will use [[https://github.com/tonini/alchemist.el][Alchemist]] instead
 - Vim Vinegar style =-= keybinding to open Dired
+* Installer
+
+If you want to install everything automatically, just clone this repo to ~~/.config/doom~, cd into it, and run ~bash install.sh~. Installation includes compiling emacs from scratch so it can take 15-30 minutes. The installer is safe and mostly idempotent (in the ways that count). You can also follow along by hand if you want in ~install.org~.
 
 * Prerequisites
+
+If you don't want to use the installer, then you will need to set some things up. Make sure to visit the doom emacs repo and install the prerequisites listed there as well.
+
 ** Installing Emacs on macOS with Homebrew
 *** Tap and install
 This may take a while to compile from source. By default this formula installs Emacs 27. I found that it had issues with screen flashes which I have not seen in version 28. Alternatively, you can always install emacs-mac instead. There is more information on the [[https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org#on-macos][doom emacs readme]]. You can see a list of available options and icons on the [[https://github.com/d12frosted/homebrew-emacs-plus#emacs-27-and-emacs-28-options][emacs-plus readme]].
@@ -54,9 +62,15 @@ cp -r /opt/homebrew/opt/emacs-plus@28/Emacs.app /Applications
 #+end_src
 
 ** Fonts
-+ [[https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip][FiraCode Nerd Font]] (from [[https://www.nerdfonts.com/font-downloads][nerdfonts.com]])
-+ [[https://devimages-cdn.apple.com/design/resources/download/SF-Font-Pro.dmg][San Francisco Pro]] (from [[https://developer.apple.com/fonts/][Apple Developer Fonts]])
-  - This is used for tabs and treemacs. It matches the system font on macOS
+
+You don't need all of these, only one of the 3 variable pitch fonts.
+
+If you run the installer, these will be installed for you. (Aside from Myriad Pro, which I do not have a license to distribute)
+
++ [[https://github.com/adamzaninovich/fira-code-nerd-font-linux-mac-otf][FiraCode Nerd Font]] (This is my own version, but you can also get it from [[https://www.nerdfonts.com/][nerdfonts.com]])
++ [[https://overpassfont.org/][Overpass]] (It's pretty ¯\_(ツ)_/¯)
++ [[https://developer.apple.com/fonts/][SF Pro]] (Default system font in macOS that for some reason you have to download to use yourself)
++ [[https://www.cufonfonts.com/font/myriad-pro][Myriad Pro]] (A proprietary Adobe font from a shady Turkish website, what could go wrong?)
 
 ** Setup Elixir LS
 These steps are taken from [[https://dev.to/mariomazo/elixir-and-doom-emacs-m29][this blog post]]
@@ -100,10 +114,12 @@ I have turned off lsp file watching in [[file:config.el][config.el]] since I was
 A better way would be to figure out how to get it to ignore certain files (like node dependencies, for instance), but I haven't gotten around to that yet
 
 * Todo
+
 - Add lambdart/ob-elixir
 - Learn and Configure Org Capture
 - Sync Google Calendar with Org Agenda
   + Two-way sync preferred
 
 * Troubleshooting
+
 🍀 Good luck!
