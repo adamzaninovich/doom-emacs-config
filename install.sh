@@ -67,38 +67,62 @@ abort() {
   exit 1
 }
 
+cmd_missing() {
+  local cmd
+  cmd="$1"
+
+  if command -v "$cmd" &> /dev/null; then
+    false
+  else
+    true
+  fi
+}
+
 ohai "Checking for dependencies"
 
-if ! command -v brew &> /dev/null; then
+install_brew_dep() {
+  local package cmd
+  package="$1"
+  cmd="${2:-package}"
+
+  if cmd_missing "$cmd"; then
+    brew install "$package" > /dev/null 2>&1
+    bullet "Installed $package with homebrew"
+  else
+    brew upgrade "$package" > /dev/null 2>&1
+    bullet "Found $package"
+  fi
+}
+
+if cmd_missing brew; then
   abort "Please install homebrew first! ${tty_underline}https://brew.sh${tty_reset}"
 else
   ohai "Found homebrew"
   ohai "Updating..."
-  brew update >/dev/null
+  brew update > /dev/null 2>&1
 fi
 
-if ! command -v git &> /dev/null; then
-  brew install git >/dev/null
-  bullet "Installed git with homebrew"
+install_brew_dep git
+install_brew_dep ripgrep rg
+install_brew_dep fd
+
+install_brew_dep cmake
+install_brew_dep jq
+
+if [[ $(uname -a) == "Darwin"*"arm64" ]]; then
+  error "You're on Apple Silicon, you should find some other way to install ${tty_yellow}shellcheck${tty_reset}"
 else
-  brew upgrade git 2> /dev/null
-  bullet "Found git"
+  install_brew_dep shellcheck
 fi
 
-if ! command -v rg &> /dev/null; then
-  brew install ripgrep >/dev/null
-  bullet "Installed ripgrep with homebrew"
+if cmd_missing npm; then
+  error "npm is not installed. Check ${tty_yellow}doom doctor${tty_reset} after install for additional dependencies"
 else
-  brew upgrade ripgrep 2> /dev/null
-  bullet "Found ripgrep"
-fi
-
-if ! command -v fd &> /dev/null; then
-  brew install fd >/dev/null
-  bullet "Installed fd with homebrew"
-else
-  brew upgrade fd 2> /dev/null
-  bullet "Found fd"
+  ohai "Installing npm dependencies"
+  cmd_missing stylelint && npm -g --silent install stylelint > "/dev/null" 2>&1
+  bullet "Installed stylelint with npm"
+  cmd_missing js-beautify && npm -g --silent install js-beautify > "/dev/null" 2>&1
+  bullet "Installed js-beautify with npm"
 fi
 
 install_emacs="no"
@@ -163,7 +187,7 @@ if [ -x "$HOME/.config/elixir-ls/release/launch.sh" ]; then
   ohai "You already have elixir-ls installed. Skipping..."
 else
   if confirm_y "Do you want to setup the Elixir Language Server?"; then
-    if ! command -v mix &> /dev/null; then
+    if cmd_missing mix; then
       error "You need to install elixir first!"
       ohai "Skipping Elixir LS"
     else
