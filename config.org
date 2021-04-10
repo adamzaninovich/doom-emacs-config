@@ -12,8 +12,6 @@ Write the header and warning to edit this file instead of config.el directly.
 
 * Table of Contents :TOC_2:noexport:
 - [[#todos][Todos]]
-  - [[#map--to-c-6][map =,,= to =C-6=]]
-  - [[#set-fringe-for-org-to-lots][Set fringe for org to lots]]
   - [[#figure-out-how-to-make-lsp-ignore-certain-files-so-that-it-can-watch-a-reasonable-amount-of-files-without-asking-or-slowing-things-down][Figure out how to make LSP ignore certain files so that it can watch a reasonable amount of files without asking or slowing things down]]
 - [[#imports][Imports]]
 - [[#functions][Functions]]
@@ -42,13 +40,6 @@ Write the header and warning to edit this file instead of config.el directly.
 - [[#additional-information][Additional Information]]
 
 * Todos
-** DONE map =,,= to =C-6=
-CLOSED: [2021-04-08 Thu 10:20]
-*** use =SPC b l= instead
-*** for switching back to the last buffer
-** TODO Set fringe for org to lots
-*** alternatively, use that centered thing from system crafters
-*** for now, zen (=SPC t z=) kind of works for this, but I still want to figure out the centered thing
 
 ** TODO Figure out how to make LSP ignore certain files so that it can watch a reasonable amount of files without asking or slowing things down
 
@@ -187,7 +178,6 @@ Download fonts
 
 (setq me/fixed-width-font-family "FiraCode Nerd Font"
       me/variable-pitch-font-family "Overpass")
-      ;; me/variable-pitch-font-family "Myriad Pro")
 
 (setq
  doom-font (font-spec :family me/fixed-width-font-family :size 14 :style "Retina")
@@ -214,17 +204,12 @@ Some good themes:
 * Org Mode
 ** Better font faces
 
-- Replace list hyphen with dot
 - Set faces for heading levels
 - Ensure that anything that should be fixed-pitch in Org files appears that way
 
 #+begin_src emacs-lisp
 
 (defun me/org-font-setup ()
-  (font-lock-add-keywords 'org-mode
-                          '(("^ *\\([-]\\) "
-                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-
   (dolist (face '((org-level-1 . 1.5)
                   (org-level-2 . 1.4)
                   (org-level-3 . 1.3)
@@ -267,6 +252,7 @@ CLOSED: [2021-04-08 Thu 10:45]
 
 (after! org
   (setq
+   org-ellipsis " ▾"
    org-directory "~/projects/org/"
    org-agenda-files '("~/projects/org/agenda.org" "~/projects/org/todo.org")
    org-log-done 'time)
@@ -274,13 +260,18 @@ CLOSED: [2021-04-08 Thu 10:45]
   (add-to-list 'org-structure-template-alist '("el"  . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist '("sh"  . "src sh"))
   (add-to-list 'org-structure-template-alist '("iex" . "src elixir"))
-
-  (org-indent-mode 1)
   (variable-pitch-mode 1)
-  (visual-line-mode 1)
   (me/org-font-setup))
 
-(add-hook 'org-mode-hook (lambda () (display-line-numbers-mode 0)))
+(add-hook 'org-mode-hook (lambda ()
+                           (visual-fill-column-mode 1)
+                           (setq
+                            visual-fill-column-center-text t
+                            visual-fill-column-width 100)
+
+                           (org-indent-mode 1)
+                           (visual-line-mode 1)
+                           (display-line-numbers-mode 0)))
 
 #+end_src
 

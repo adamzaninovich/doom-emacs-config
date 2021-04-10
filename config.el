@@ -46,7 +46,6 @@
 
 (setq me/fixed-width-font-family "FiraCode Nerd Font"
       me/variable-pitch-font-family "Overpass")
-      ;; me/variable-pitch-font-family "Myriad Pro")
 
 (setq
  doom-font (font-spec :family me/fixed-width-font-family :size 14 :style "Retina")
@@ -56,10 +55,6 @@
 (setq doom-theme 'doom-palenight)
 
 (defun me/org-font-setup ()
-  (font-lock-add-keywords 'org-mode
-                          '(("^ *\\([-]\\) "
-                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-
   (dolist (face '((org-level-1 . 1.5)
                   (org-level-2 . 1.4)
                   (org-level-3 . 1.3)
@@ -86,6 +81,7 @@
 
 (after! org
   (setq
+   org-ellipsis " ▾"
    org-directory "~/projects/org/"
    org-agenda-files '("~/projects/org/agenda.org" "~/projects/org/todo.org")
    org-log-done 'time)
@@ -93,13 +89,18 @@
   (add-to-list 'org-structure-template-alist '("el"  . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist '("sh"  . "src sh"))
   (add-to-list 'org-structure-template-alist '("iex" . "src elixir"))
-
-  (org-indent-mode 1)
   (variable-pitch-mode 1)
-  (visual-line-mode 1)
   (me/org-font-setup))
 
-(add-hook 'org-mode-hook (lambda () (display-line-numbers-mode 0)))
+(add-hook 'org-mode-hook (lambda ()
+                           (visual-fill-column-mode 1)
+                           (setq
+                            visual-fill-column-center-text t
+                            visual-fill-column-width 100)
+
+                           (org-indent-mode 1)
+                           (visual-line-mode 1)
+                           (display-line-numbers-mode 0)))
 
 (defun me/org-babel-tangle-config ()
   (when (member (buffer-file-name)
