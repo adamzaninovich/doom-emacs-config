@@ -106,6 +106,7 @@ install_brew_dep git
 install_brew_dep ripgrep rg
 install_brew_dep fd
 
+install_brew_dep pandoc
 install_brew_dep cmake
 install_brew_dep jq
 
