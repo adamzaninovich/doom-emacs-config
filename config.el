@@ -98,7 +98,7 @@
                            (visual-fill-column-mode 1)
                            (setq
                             visual-fill-column-center-text t
-                            visual-fill-column-width 120)
+                            visual-fill-column-width 100)
 
                            (org-indent-mode 1)
                            (visual-line-mode 1)
