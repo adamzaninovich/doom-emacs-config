@@ -193,6 +193,13 @@
 
 (after! evil-snipe (evil-snipe-mode -1))
 
+(use-package! pdf-tools
+  :defer t
+  :config
+  (pdf-loader-install)
+  (setq pdf-view-use-scaling t
+        pdf-view-use-imagemagick nil))
+
 (add-hook 'elixir-mode-hook
           (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
 (add-hook 'elixir-format-hook (lambda ()

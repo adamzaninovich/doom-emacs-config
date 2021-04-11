@@ -35,6 +35,7 @@ Write the header and warning to edit this file instead of config.el directly.
   - [[#lsp][LSP]]
   - [[#projectile][Projectile]]
   - [[#evil-snipe][Evil-Snipe]]
+  - [[#pdfs][PDFs]]
   - [[#elixir][Elixir]]
 - [[#key-bindings][Key Bindings]]
 - [[#additional-information][Additional Information]]
@@ -470,6 +471,21 @@ Disable evil-snipe mode so that =S= and =s= work as they do in vim
 #+begin_src emacs-lisp
 
 (after! evil-snipe (evil-snipe-mode -1))
+
+#+end_src
+
+** PDFs
+
+This takes emacs from freezing up when opening a PDF to rendering it smoothly on a HiDPI screen
+
+#+begin_src emacs-lisp
+
+(use-package! pdf-tools
+  :defer t
+  :config
+  (pdf-loader-install)
+  (setq pdf-view-use-scaling t
+        pdf-view-use-imagemagick nil))
 
 #+end_src
 
