@@ -45,37 +45,39 @@
 (setq display-line-numbers-type 'relative)
 
 (setq me/fixed-width-font-family "FiraCode Nerd Font"
-      me/variable-pitch-font-family "Overpass")
+      me/fixed-width-font-style "Retina"
+      me/variable-pitch-font-family "Overpass"
+      me/variable-pitch-font-style "Regular")
 
 (setq
- doom-font (font-spec :family me/fixed-width-font-family :size 14 :style "Retina")
- doom-big-font (font-spec :family me/fixed-width-font-family :size 20 :style "Retina")
- doom-variable-pitch-font (font-spec :family me/variable-pitch-font-family :size 16 :style "Regular"))
+ doom-font (font-spec
+            :family me/fixed-width-font-family
+            :style me/fixed-width-font-style
+            :size 14)
+ doom-big-font (font-spec
+                :family me/fixed-width-font-family
+                :style me/fixed-width-font-style
+                :size 20)
+ doom-variable-pitch-font (font-spec
+                           :family me/variable-pitch-font-family
+                           :style me/variable-pitch-font-style
+                           :size 16))
 
 (setq doom-theme 'doom-palenight)
 
 (defun me/org-font-setup ()
-  (dolist (face '((org-level-1 . 1.5)
-                  (org-level-2 . 1.4)
-                  (org-level-3 . 1.3)
-                  (org-level-4 . 1.2)
+  (dolist (face '((org-level-1 . 1.3)
+                  (org-level-2 . 1.2)
+                  (org-level-3 . 1.1)
+                  (org-level-4 . 1.0)
                   (org-level-5 . 1.0)
                   (org-level-6 . 1.0)
                   (org-level-7 . 1.0)
                   (org-level-8 . 1.0)))
-    (set-face-attribute (car face) nil :font me/variable-pitch-font-family :weight 'Semibold :height (cdr face)))
-
-  (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-table nil                 :inherit 'fixed-pitch)
-  (set-face-attribute 'org-formula nil               :inherit 'fixed-pitch)
-  (set-face-attribute 'org-code nil                  :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-table nil                 :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-verbatim nil              :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-special-keyword nil       :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-meta-line nil             :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-checkbox nil              :inherit 'fixed-pitch)
-  (set-face-attribute 'line-number nil               :inherit 'fixed-pitch)
-  (set-face-attribute 'line-number-current-line nil  :inherit 'fixed-pitch))
+    (set-face-attribute (car face) nil
+                        :font me/variable-pitch-font-family
+                        :weight 'Semibold
+                        :height (cdr face))))
 
 (require 'org-tempo)
 
