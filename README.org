@@ -1,6 +1,5 @@
-#+TITLE:   Adam's Doom Emacs Configuration
-#+AUTHOR:  Adam Zaninovich
-#+STARTUP: inlineimages nofold
+#+title:   Adam's Doom Emacs Configuration
+#+author:  Adam Zaninovich
 
 * Table of Contents :TOC_2:noexport:
 - [[#description][Description]]
@@ -20,7 +19,7 @@ This is my personal Doom Emacs configuration. I've been a vim and neovim user fo
 This configuration should reflect that, at least a little bit, and will continue to do so even more in the future as I try to whittle down Doom Emacs to a smaller feature set over time.
 
 #+ATTR_ORG: :width 400
-[[./doc/perfection.png]]
+[[./resources/docs/perfection.png]]
 
 ** Features
 Here are a few features of this configuration:

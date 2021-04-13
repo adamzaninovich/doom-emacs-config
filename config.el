@@ -14,7 +14,7 @@
 (setq user-full-name me/full-name
       user-mail-address me/mail-address)
 
-(let* ((banner-directory (substitute-in-file-name "$HOME/.config/doom/banners"))
+(let* ((banner-directory (substitute-in-file-name "$HOME/.config/doom/resources/banners"))
        (command (concat "\\ls -A1d " banner-directory "/*.png"))
        (output (shell-command-to-string command))
        (banners (split-string output "\n" t))

@@ -1,5 +1,5 @@
 secret.el
 custom.el
-banners/doom\ logos.pxd/*
+resources/banners/doom\ logos.pxd/*
 config-backup.el
 .DS_Store

@@ -99,7 +99,7 @@ Sets a random banner on startup - this will select a random banner from ~banners
 
 #+begin_src emacs-lisp
 
-(let* ((banner-directory (substitute-in-file-name "$HOME/.config/doom/banners"))
+(let* ((banner-directory (substitute-in-file-name "$HOME/.config/doom/resources/banners"))
        (command (concat "\\ls -A1d " banner-directory "/*.png"))
        (output (shell-command-to-string command))
        (banners (split-string output "\n" t))
@@ -178,6 +178,7 @@ Download fonts
 + [[https://overpassfont.org/][Overpass]] (It's pretty ¯\_(ツ)_/¯)
 + [[https://www.cufonfonts.com/font/myriad-pro][Myriad Pro]] (A proprietary Adobe font from a shady Turkish website, what could go wrong?)
 + [[https://developer.apple.com/fonts/][SF Pro]] (Default system font in macOS that for some reason you have to download to use yourself)
++ [[https://the-digital-reader.com/wp-content/uploads/2016/04/Ember-bookerly.zip][Bookerly]] (Amazon's latest and best eBook/Kindle font)
 
 #+begin_src emacs-lisp
 
