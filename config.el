@@ -44,40 +44,41 @@
 
 (setq display-line-numbers-type 'relative)
 
-(setq me/fixed-width-font-family "FiraCode Nerd Font"
-      me/fixed-width-font-style "Retina"
-      me/variable-pitch-font-family "Overpass"
-      me/variable-pitch-font-style "Regular")
+(setq me/fixed-width-font '(:family "FiraCode Nerd Font" :style "Retina")
+      me/variable-pitch-font '(:family "Overpass" :style "Regular")
+      me/variable-pitch-serif-font '(:family "Bookerly" :style "Regular"))
 
-(setq
- doom-font (font-spec
-            :family me/fixed-width-font-family
-            :style me/fixed-width-font-style
-            :size 14)
- doom-big-font (font-spec
-                :family me/fixed-width-font-family
-                :style me/fixed-width-font-style
-                :size 20)
- doom-variable-pitch-font (font-spec
-                           :family me/variable-pitch-font-family
-                           :style me/variable-pitch-font-style
-                           :size 16))
+(setq me/org-font-family (plist-get me/variable-pitch-serif-font :family))
+
+(setq doom-font
+      (font-spec :family (plist-get me/fixed-width-font :family)
+                 :style  (plist-get me/fixed-width-font :style)
+                 :size   14)
+      doom-big-font
+      (font-spec :family (plist-get me/fixed-width-font :family)
+                 :style  (plist-get me/fixed-width-font :style)
+                 :size   20)
+      doom-variable-pitch-font
+      (font-spec :family (plist-get me/variable-pitch-font :family)
+                 :style  (plist-get me/variable-pitch-font :style)
+                 :size   16))
 
 (setq doom-theme 'doom-palenight)
 
 (defun me/org-font-setup ()
-  (dolist (face '((org-level-1 . 1.3)
-                  (org-level-2 . 1.2)
-                  (org-level-3 . 1.1)
-                  (org-level-4 . 1.0)
-                  (org-level-5 . 1.0)
-                  (org-level-6 . 1.0)
-                  (org-level-7 . 1.0)
-                  (org-level-8 . 1.0)))
-    (set-face-attribute (car face) nil
-                        :font me/variable-pitch-font-family
-                        :weight 'Semibold
-                        :height (cdr face))))
+  (dolist (face '((:name org-level-1 :weight bold   :height 1.3)
+                  (:name org-level-2 :weight bold   :height 1.2)
+                  (:name org-level-3 :weight bold   :height 1.1)
+                  (:name org-level-4 :weight normal :height 1.1)
+                  (:name org-level-5 :weight normal :height 1.1)
+                  (:name org-level-6 :weight normal :height 1.1)
+                  (:name org-level-7 :weight normal :height 1.1)
+                  (:name org-level-8 :weight normal :height 1.1)))
+
+    (set-face-attribute (plist-get face :name) nil
+                        :family me/org-font-family
+                        :weight (plist-get face :weight)
+                        :height (plist-get face :height))))
 
 (require 'org-tempo)
 
@@ -96,9 +97,8 @@
 
 (add-hook 'org-mode-hook (lambda ()
                            (visual-fill-column-mode 1)
-                           (setq
-                            visual-fill-column-center-text t
-                            visual-fill-column-width 100)
+                           (setq-local visual-fill-column-center-text t
+                                       visual-fill-column-width 100)
 
                            (org-indent-mode 1)
                            (visual-line-mode 1)
@@ -158,7 +158,7 @@
    centaur-tabs-bar-height 30
    centaur-tabs-height 28)
 
-  (centaur-tabs-change-fonts me/variable-pitch-font-family 150)
+  (centaur-tabs-change-fonts (plist-get me/variable-pitch-font :family) 150)
 
   (defun centaur-tabs-buffer-groups ()
     "`centaur-tabs-buffer-groups' control buffers' group rules.
