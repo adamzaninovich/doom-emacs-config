@@ -48,7 +48,8 @@
       me/variable-pitch-font '(:family "Overpass" :style "Regular")
       me/variable-pitch-serif-font '(:family "Bookerly" :style "Regular"))
 
-(setq me/org-font-family (plist-get me/variable-pitch-serif-font :family))
+(setq me/org-font-family (plist-get me/variable-pitch-font :family)
+      me/ebook-font-family (plist-get me/variable-pitch-serif-font :family))
 
 (setq doom-font
       (font-spec :family (plist-get me/fixed-width-font :family)
@@ -228,8 +229,8 @@
 
   (defun +nov-mode-setup ()
     (face-remap-add-relative 'variable-pitch
-                             :family (plist-get me/variable-pitch-serif-font :family)
-                             :height 1.2
+                             :family me/ebook-font-family
+                             :height 1.1
                              :width 'semi-expanded)
     (face-remap-add-relative 'default :height 1.1)
     (setq-local line-spacing 0.2
@@ -238,7 +239,7 @@
     ;; (require 'visual-fill-column nil t)
     (setq-local visual-fill-column-center-text t
                 visual-fill-column-width 100
-                nov-text-width 100)
+                nov-text-width 90)
     (visual-fill-column-mode 1)
     (hl-line-mode -1)
 
