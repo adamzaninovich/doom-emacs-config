@@ -181,6 +181,7 @@ if confirm_y "Install Fonts?"; then
   install_font '^fira.code.*\.(otf|ttf)$' "FiraCode" "resources/fonts/Fira*"     "$HOME/Library/Fonts/"
   install_font '^sf.pro.*\.(otf|ttf)$'    "SF Pro"   "resources/fonts/SF*"       "/Library/Fonts/"
   install_font '^overpass.*\.(otf|ttf)$'  "Overpass" "resources/fonts/overpass*" "$HOME/Library/Fonts/"
+  install_font '^bookerly.*\.ttf$'        "Bookerly" "resources/fonts/Bookerly*" "$HOME/Library/Fonts/"
 else
   ohai "Ok, You can install them manually."
   echo "    There are links in ${tty_yellow}config.org${tty_reset} under ${tty_purple}Fonts${tty_reset}."
