@@ -71,7 +71,7 @@ bullet() {
 }
 
 error() {
-  printf "${tty_red}ERROR:${tty_bold} %s${tty_reset}\n" "$(shell_join "$@")"
+  printf "${tty_red}ERR${tty_bold} %s${tty_reset}\n" "$(shell_join "$@")"
 }
 
 confirm_y() {
@@ -162,14 +162,14 @@ install_brew_dep git
 install_brew_dep ripgrep rg
 install_brew_dep fd
 
-install_brew_dep pandoc
 install_brew_dep cmake
 install_brew_dep jq
 
 if [[ $(uname -a) == "Darwin"*"arm64" ]]; then
-  error "You're on Apple Silicon, you should find some other way to install ${tty_yellow}shellcheck${tty_reset}"
+  error "Apple Silicon detected, please install ${tty_yellow}pandoc${tty_reset} and ${tty_yellow}shellcheck${tty_reset} manually"
 else
   install_brew_dep shellcheck
+  install_brew_dep pandoc
 fi
 
 #+end_src
@@ -237,10 +237,10 @@ unset install_emacs
 #+begin_src sh
 
 install_font() {
-  local regex fontname fonts_glob target
+  local regex fontname tarball target
   regex="$1"
   fontname="$2"
-  fonts_glob="$3"
+  tarball="$3"
   target="$4"
   found=$(fd -IL -d 1 -t f "$regex" "$HOME/Library/Fonts" /Library/Fonts)
 
@@ -248,18 +248,16 @@ install_font() {
     ohai "It looks like you already have $fontname font faces installed."
     bullet "Skipping $fontname"
   else
-    for font in $fonts_glob; do
-      \cp -i "$font" "$target"
-    done
+    tar -zxf "resources/fonts/$tarball" -C "$target"
     bullet "Installed $fontname"
   fi
 }
 
 if confirm_y "Install Fonts?"; then
-  install_font '^fira.code.*\.(otf|ttf)$' "FiraCode" "resources/fonts/Fira*"     "$HOME/Library/Fonts/"
-  install_font '^sf.pro.*\.(otf|ttf)$'    "SF Pro"   "resources/fonts/SF*"       "/Library/Fonts/"
-  install_font '^overpass.*\.(otf|ttf)$'  "Overpass" "resources/fonts/overpass*" "$HOME/Library/Fonts/"
-  install_font '^bookerly.*\.ttf$'        "Bookerly" "resources/fonts/Bookerly*" "$HOME/Library/Fonts/"
+  install_font '^sf.pro.*$'    "SF Pro"   "sf-pro.tar.gz"   "/Library/Fonts/"
+  install_font '^fira.code.*$' "FiraCode" "firacode.tar.gz" "$HOME/Library/Fonts/"
+  install_font '^overpass.*$'  "Overpass" "overpass.tar.gz" "$HOME/Library/Fonts/"
+  install_font '^bookerly.*$'  "Bookerly" "bookerly.tar.gz" "$HOME/Library/Fonts/"
 else
   ohai "Ok, You can install them manually."
   echo "    There are links in ${tty_yellow}config.org${tty_reset} under ${tty_purple}Fonts${tty_reset}."
@@ -339,8 +337,12 @@ fi
 
 #+begin_src sh
 
-cp secret.example.el secret.el
-ohai "Created $HOME/.config/doom/secrets.el"
+if [ ! -f secret.el ]; then
+  cp secret.example.el secret.el
+  ohai "Created $HOME/.config/doom/secret.el"
+else
+  ohai "$HOME/.config/doom/secret.el already exists"
+fi
 
 #+end_src
 
@@ -364,7 +366,7 @@ fi
 echo "Also, now would be a great time to run"
 echo "  ${tty_yellow}doom doctor${tty_reset}"
 echo
-echo "Finally, you should edit $HOME/.config/doom/secrets.el and add your name and email"
+echo "Finally, you should edit $HOME/.config/doom/secret.el and add your name and email"
 echo
 echo "After that, open Emacs.app in your Applications folder and you're good to go!"
 echo "  Enjoy! - Adam"
