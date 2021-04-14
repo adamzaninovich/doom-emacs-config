@@ -16,6 +16,7 @@ Write the header and warning to edit this file instead of config.el directly.
 - [[#imports][Imports]]
 - [[#initial-setup][Initial Setup]]
   - [[#doom-banner][Doom Banner]]
+  - [[#doom-quit][Doom Quit]]
 - [[#basic-functionality][Basic Functionality]]
 - [[#basic-ui-configuration][Basic UI Configuration]]
   - [[#fonts][Fonts]]
@@ -92,6 +93,14 @@ Sets a random banner on startup - this will select a random banner from ~banners
        (banners (split-string output "\n" t))
        (banner (me/random-choice banners)))
   (setq fancy-splash-image banner))
+
+#+end_src
+
+** Doom Quit
+
+#+begin_src emacs-lisp
+
+(setq +doom-quit-messages (me/read-lines "resources/messages.txt"))
 
 #+end_src
 

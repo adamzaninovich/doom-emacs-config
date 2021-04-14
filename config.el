@@ -15,6 +15,8 @@
        (banner (me/random-choice banners)))
   (setq fancy-splash-image banner))
 
+(setq +doom-quit-messages (me/read-lines "resources/messages.txt"))
+
 (setq-default delete-by-moving-to-trash t
               window-combination-resize t
               x-stretch-cursor t)
