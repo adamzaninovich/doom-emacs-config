@@ -299,13 +299,15 @@
     (nth index items)))
 
 (defun me/read-lines (file)
-  "Reads a file and returns the lines as a list"
-  (let ((file-contents (with-temp-buffer
-                         (insert-file-contents file)
-                         (buffer-substring-no-properties
-                          (point-min)
-                          (point-max)))))
-    (split-string file-contents "\n" t)))
+  "Reads a file, filters out lines starting with #, and returns the lines as a list"
+  (let* ((file-contents (with-temp-buffer
+                          (insert-file-contents file)
+                          (buffer-substring-no-properties
+                           (point-min)
+                           (point-max))))
+         (lines (split-string file-contents "\n" t)))
+    (seq-remove (lambda (line) (string-match-p "^#" line)) lines)))
 
 (defun me/random-line-from-file (file)
+  "Reads a file and returns a random line"
   (me/random-choice (me/read-lines file)))
