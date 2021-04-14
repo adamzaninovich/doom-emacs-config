@@ -1,3 +1,7 @@
+# This file will be read when doom starts
+# When you quit, it will display a random message from this file
+# Any empty lines or lines starting with # will be excluded
+
 # From Doom 1
 
 # Please don't leave, there's more demons to toast!
@@ -27,7 +31,7 @@ It's not like I'll miss you or anything, b-baka!
 Okay, look. We've both said a lot of things you're going to regret...
 You are *not* prepared!
 
-# Lews Therin Quotes
+# Lews Therin Telamon Quotes (from Lews Therin Telamon Bot https://github.com/Tobuss/Lews-Therin-Bot)
 
 # Where are all the dead? Why will they not be silent?
 # Distant Weeping
