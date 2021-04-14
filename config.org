@@ -14,6 +14,7 @@ Write the header and warning to edit this file instead of config.el directly.
 - [[#todos][Todos]]
   - [[#figure-out-how-to-make-lsp-ignore-certain-files-so-that-it-can-watch-a-reasonable-amount-of-files-without-asking-or-slowing-things-down][Figure out how to make LSP ignore certain files so that it can watch a reasonable amount of files without asking or slowing things down]]
 - [[#imports][Imports]]
+- [[#functions][Functions]]
 - [[#initial-setup][Initial Setup]]
   - [[#doom-banner][Doom Banner]]
   - [[#doom-quit][Doom Quit]]
@@ -40,7 +41,6 @@ Write the header and warning to edit this file instead of config.el directly.
   - [[#elixir][Elixir]]
 - [[#tramp][Tramp]]
 - [[#key-bindings][Key Bindings]]
-- [[#functions][Functions]]
 - [[#additional-information][Additional Information]]
 
 * Todos
@@ -67,6 +67,34 @@ fi
 #+begin_src emacs-lisp
 
 (load! "secret.el")
+
+#+end_src
+
+* Functions
+
+Helpful stuff
+
+#+begin_src emacs-lisp
+
+(defun me/random-choice (items)
+  "Returns a random item from a given list"
+  (let* ((size (length items))
+         (index (random size)))
+    (nth index items)))
+
+(defun me/read-lines (file)
+  "Reads a file, filters out lines starting with #, and returns the lines as a list"
+  (let* ((file-contents (with-temp-buffer
+                          (insert-file-contents file)
+                          (buffer-substring-no-properties
+                           (point-min)
+                           (point-max))))
+         (lines (split-string file-contents "\n" t)))
+    (seq-remove (lambda (line) (string-match-p "^#" line)) lines)))
+
+(defun me/random-line-from-file (file)
+  "Reads a file and returns a random line"
+  (me/random-choice (me/read-lines file)))
 
 #+end_src
 
@@ -100,7 +128,10 @@ Sets a random banner on startup - this will select a random banner from ~banners
 
 #+begin_src emacs-lisp
 
-(setq +doom-quit-messages (me/read-lines "resources/messages.txt"))
+(setq +doom-quit-messages
+      (me/read-lines
+       (substitute-in-file-name
+        "$HOME/.config/doom/resources/messages.txt")))
 
 #+end_src
 
@@ -638,34 +669,6 @@ fi
 
 (map! :desc "Decrease current window width" :g "s-[" #'evil-window-decrease-width)
 (map! :desc "Increase current window width" :g "s-]" #'evil-window-increase-width)
-
-#+end_src
-
-* Functions
-
-Helpful stuff
-
-#+begin_src emacs-lisp
-
-(defun me/random-choice (items)
-  "Returns a random item from a given list"
-  (let* ((size (length items))
-         (index (random size)))
-    (nth index items)))
-
-(defun me/read-lines (file)
-  "Reads a file, filters out lines starting with #, and returns the lines as a list"
-  (let* ((file-contents (with-temp-buffer
-                          (insert-file-contents file)
-                          (buffer-substring-no-properties
-                           (point-min)
-                           (point-max))))
-         (lines (split-string file-contents "\n" t)))
-    (seq-remove (lambda (line) (string-match-p "^#" line)) lines)))
-
-(defun me/random-line-from-file (file)
-  "Reads a file and returns a random line"
-  (me/random-choice (me/read-lines file)))
 
 #+end_src
 

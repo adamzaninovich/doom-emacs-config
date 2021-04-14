@@ -5,6 +5,26 @@
 
 (load! "secret.el")
 
+(defun me/random-choice (items)
+  "Returns a random item from a given list"
+  (let* ((size (length items))
+         (index (random size)))
+    (nth index items)))
+
+(defun me/read-lines (file)
+  "Reads a file, filters out lines starting with #, and returns the lines as a list"
+  (let* ((file-contents (with-temp-buffer
+                          (insert-file-contents file)
+                          (buffer-substring-no-properties
+                           (point-min)
+                           (point-max))))
+         (lines (split-string file-contents "\n" t)))
+    (seq-remove (lambda (line) (string-match-p "^#" line)) lines)))
+
+(defun me/random-line-from-file (file)
+  "Reads a file and returns a random line"
+  (me/random-choice (me/read-lines file)))
+
 (setq user-full-name me/full-name
       user-mail-address me/mail-address)
 
@@ -15,7 +35,10 @@
        (banner (me/random-choice banners)))
   (setq fancy-splash-image banner))
 
-(setq +doom-quit-messages (me/read-lines "resources/messages.txt"))
+(setq +doom-quit-messages
+      (me/read-lines
+       (substitute-in-file-name
+        "$HOME/.config/doom/resources/messages.txt")))
 
 (setq-default delete-by-moving-to-trash t
               window-combination-resize t
@@ -293,23 +316,3 @@
 
 (map! :desc "Decrease current window width" :g "s-[" #'evil-window-decrease-width)
 (map! :desc "Increase current window width" :g "s-]" #'evil-window-increase-width)
-
-(defun me/random-choice (items)
-  "Returns a random item from a given list"
-  (let* ((size (length items))
-         (index (random size)))
-    (nth index items)))
-
-(defun me/read-lines (file)
-  "Reads a file, filters out lines starting with #, and returns the lines as a list"
-  (let* ((file-contents (with-temp-buffer
-                          (insert-file-contents file)
-                          (buffer-substring-no-properties
-                           (point-min)
-                           (point-max))))
-         (lines (split-string file-contents "\n" t)))
-    (seq-remove (lambda (line) (string-match-p "^#" line)) lines)))
-
-(defun me/random-line-from-file (file)
-  "Reads a file and returns a random line"
-  (me/random-choice (me/read-lines file)))
