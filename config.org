@@ -37,6 +37,7 @@ Write the header and warning to edit this file instead of config.el directly.
   - [[#pdfs][PDFs]]
   - [[#ebooks][eBooks]]
   - [[#elixir][Elixir]]
+- [[#tramp][Tramp]]
 - [[#key-bindings][Key Bindings]]
 - [[#functions][Functions]]
 - [[#additional-information][Additional Information]]
@@ -580,6 +581,40 @@ Create a buffer-local hook to run elixir-format on save, only when we enable eli
                                           (list "--dot-formatter"
                                                 (concat (locate-dominating-file buffer-file-name ".formatter.exs") ".formatter.exs")))
                                   (setq elixir-format-arguments nil))))
+
+#+end_src
+
+* Tramp
+
+To use Tramp to edit files on remote servers, just use ~find-file~ (=SPC .=) and type something like =/ssh:user@server:file/or/directory= or =/ssh:server:=.
+
+Tramp needs to recognize the prompt on the remote server to work correctly.
+
+Below I set tramp's terminal type to ~tramp~ so that I can use that in my remote configs.
+
+If you have customized your prompt on the remote server, make sure that you add something like the following early on in the shell startup process. (I put it at the top of my ~.bashrc~)
+
+#+begin_src sh
+
+# remote: ~/.bashrc
+
+# bail out before setting custom prompt (or anything else that tramp doesn't need)
+[ "$TERM" = "tramp" ] && return
+
+# or at the very least
+
+if [ "$TERM" = "tramp" ]; then
+  export PS1='$ '
+else
+  # load custom prompt here
+fi
+
+#+end_src
+
+#+begin_src emacs-lisp
+
+(setq tramp-default-method "ssh")
+(setq tramp-terminal-type "tramp")
 
 #+end_src
 

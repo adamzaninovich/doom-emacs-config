@@ -281,6 +281,9 @@
                                                 (concat (locate-dominating-file buffer-file-name ".formatter.exs") ".formatter.exs")))
                                   (setq elixir-format-arguments nil))))
 
+(setq tramp-default-method "ssh")
+(setq tramp-terminal-type "tramp")
+
 (map! :desc "Open Dired here" :n "-" #'dired-jump)
 
 (map! :desc "Next Tab" :g "s-}" #'centaur-tabs-forward)
