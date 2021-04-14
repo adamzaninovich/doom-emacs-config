@@ -13,7 +13,7 @@
        (output (shell-command-to-string command))
        (banners (split-string output "\n" t))
        (banner (me/random-choice banners)))
-  (setq +doom-dashboard-banner-file banner))
+  (setq fancy-splash-image banner))
 
 (setq-default delete-by-moving-to-trash t
               window-combination-resize t

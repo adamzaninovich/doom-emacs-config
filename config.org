@@ -91,7 +91,7 @@ Sets a random banner on startup - this will select a random banner from ~banners
        (output (shell-command-to-string command))
        (banners (split-string output "\n" t))
        (banner (me/random-choice banners)))
-  (setq +doom-dashboard-banner-file banner))
+  (setq fancy-splash-image banner))
 
 #+end_src
 
