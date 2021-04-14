@@ -14,7 +14,6 @@ Write the header and warning to edit this file instead of config.el directly.
 - [[#todos][Todos]]
   - [[#figure-out-how-to-make-lsp-ignore-certain-files-so-that-it-can-watch-a-reasonable-amount-of-files-without-asking-or-slowing-things-down][Figure out how to make LSP ignore certain files so that it can watch a reasonable amount of files without asking or slowing things down]]
 - [[#imports][Imports]]
-- [[#functions][Functions]]
 - [[#initial-setup][Initial Setup]]
   - [[#doom-banner][Doom Banner]]
 - [[#basic-functionality][Basic Functionality]]
@@ -39,6 +38,7 @@ Write the header and warning to edit this file instead of config.el directly.
   - [[#ebooks][eBooks]]
   - [[#elixir][Elixir]]
 - [[#key-bindings][Key Bindings]]
+- [[#functions][Functions]]
 - [[#additional-information][Additional Information]]
 
 * Todos
@@ -65,20 +65,6 @@ fi
 #+begin_src emacs-lisp
 
 (load! "secret.el")
-
-#+end_src
-
-* Functions
-
-Helpful stuff
-
-#+begin_src emacs-lisp
-
-(defun me/random-choice (items)
-  "Returns a random item from a given list"
-  (let* ((size (length items))
-         (index (random size)))
-    (nth index items)))
 
 #+end_src
 
@@ -608,6 +594,32 @@ Create a buffer-local hook to run elixir-format on save, only when we enable eli
 
 (map! :desc "Decrease current window width" :g "s-[" #'evil-window-decrease-width)
 (map! :desc "Increase current window width" :g "s-]" #'evil-window-increase-width)
+
+#+end_src
+
+* Functions
+
+Helpful stuff
+
+#+begin_src emacs-lisp
+
+(defun me/random-choice (items)
+  "Returns a random item from a given list"
+  (let* ((size (length items))
+         (index (random size)))
+    (nth index items)))
+
+(defun me/read-lines (file)
+  "Reads a file and returns the lines as a list"
+  (let ((file-contents (with-temp-buffer
+                         (insert-file-contents file)
+                         (buffer-substring-no-properties
+                          (point-min)
+                          (point-max)))))
+    (split-string file-contents "\n" t)))
+
+(defun me/random-line-from-file (file)
+  (me/random-choice (me/read-lines file)))
 
 #+end_src
 

@@ -5,12 +5,6 @@
 
 (load! "secret.el")
 
-(defun me/random-choice (items)
-  "Returns a random item from a given list"
-  (let* ((size (length items))
-         (index (random size)))
-    (nth index items)))
-
 (setq user-full-name me/full-name
       user-mail-address me/mail-address)
 
@@ -294,3 +288,21 @@
 
 (map! :desc "Decrease current window width" :g "s-[" #'evil-window-decrease-width)
 (map! :desc "Increase current window width" :g "s-]" #'evil-window-increase-width)
+
+(defun me/random-choice (items)
+  "Returns a random item from a given list"
+  (let* ((size (length items))
+         (index (random size)))
+    (nth index items)))
+
+(defun me/read-lines (file)
+  "Reads a file and returns the lines as a list"
+  (let ((file-contents (with-temp-buffer
+                         (insert-file-contents file)
+                         (buffer-substring-no-properties
+                          (point-min)
+                          (point-max)))))
+    (split-string file-contents "\n" t)))
+
+(defun me/random-line-from-file (file)
+  (me/random-choice (me/read-lines file)))
