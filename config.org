@@ -2,17 +2,12 @@
 #+author: Adam Zaninovich
 #+PROPERTY: header-args:emacs-lisp :tangle ./config.el
 
-Write the header and warning to edit this file instead of config.el directly.
-#+begin_src emacs-lisp
-;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
-
-;;; NOTE: `config.el' is now generated from `config.org'. Please edit that file
-;;;       in Emacs and `config.el' will be generated automatically!
-#+end_src
 
 * Table of Contents :TOC_2:noexport:
 - [[#todos][Todos]]
   - [[#figure-out-how-to-make-lsp-ignore-certain-files-so-that-it-can-watch-a-reasonable-amount-of-files-without-asking-or-slowing-things-down][Figure out how to make LSP ignore certain files so that it can watch a reasonable amount of files without asking or slowing things down]]
+- [[#packages][Packages]]
+- [[#header][Header]]
 - [[#imports][Imports]]
 - [[#functions][Functions]]
 - [[#initial-setup][Initial Setup]]
@@ -46,6 +41,41 @@ Write the header and warning to edit this file instead of config.el directly.
 * Todos
 
 ** TODO Figure out how to make LSP ignore certain files so that it can watch a reasonable amount of files without asking or slowing things down
+
+* Packages
+
+Add ~package!~ directives here, and ~packages.el~ will be generated from this section.
+
+#+begin_src emacs-lisp :tangle ./packages.el
+;; -*- no-byte-compile: t; -*-
+;;; $DOOMDIR/packages.el
+
+;;; NOTE: `packages.el' is now generated from `config.org'. Please edit that file
+;;;       in Emacs and `packages.el' will be generated automatically!
+
+;; To install a package with Doom you must declare them here and run 'doom sync'
+;; on the command line, then restart Emacs for the changes to take effect -- or
+;; use 'M-x doom/reload'.
+
+;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
+;(package! some-package)
+
+(package! pdf-tools)
+(package! nov)
+(package! polymode)
+
+#+end_src
+
+* Header
+
+Write the header and warning to edit this file instead of config.el directly.
+
+#+begin_src emacs-lisp
+;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+
+;;; NOTE: `config.el' is now generated from `config.org'. Please edit that file
+;;;       in Emacs and `config.el' will be generated automatically!
+#+end_src
 
 * Imports
 
@@ -621,6 +651,42 @@ Create a buffer-local hook to run elixir-format on save, only when we enable eli
                                           (list "--dot-formatter"
                                                 (concat (locate-dominating-file buffer-file-name ".formatter.exs") ".formatter.exs")))
                                   (setq elixir-format-arguments nil))))
+
+#+end_src
+
+*** Setup Ploymode with Elixir and Web Mode
+
+This sets up support for webmode inside of =~L= Liveview eex sigils in Elixir files as well as support for ~.leex~ template files
+
+#+begin_src emacs-lisp
+
+(use-package! polymode
+  :mode ("\.ex$" . poly-elixir-web-mode)
+  :config
+  (define-hostmode poly-elixir-hostmode :mode 'elixir-mode)
+  (define-innermode poly-liveview-expr-elixir-innermode
+    :mode 'web-mode
+    :head-matcher (rx line-start (* space) "~L" (= 3 (char "\"'")) line-end)
+    :tail-matcher (rx line-start (* space) (= 3 (char "\"'")) line-end)
+    :head-mode 'host
+    :tail-mode 'host
+    :allow-nested nil
+    :keep-in-mode 'host
+    :fallback-mode 'host)
+  (define-polymode poly-elixir-web-mode
+    :hostmode 'poly-elixir-hostmode
+    :innermodes '(poly-liveview-expr-elixir-innermode)))
+
+(after! web-mode
+  (dolist (tuple '(("elixir" . "\\.ex\\'")
+                   ("elixir" . "\\.eex\\'")
+                   ("elixir" . "\\.leex\\'")))
+    (add-to-list 'web-mode-engines-alist tuple)))
+
+;; This is a temporary fix. Doom currently adds support for web-mode in eex
+;; files, but does not yet support leex files. This line can be removed when
+;; they do.
+(add-to-list 'auto-mode-alist '("\\.leex\\'" . web-mode))
 
 #+end_src
 

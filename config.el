@@ -306,6 +306,34 @@
                                                 (concat (locate-dominating-file buffer-file-name ".formatter.exs") ".formatter.exs")))
                                   (setq elixir-format-arguments nil))))
 
+(use-package! polymode
+  :mode ("\.ex$" . poly-elixir-web-mode)
+  :config
+  (define-hostmode poly-elixir-hostmode :mode 'elixir-mode)
+  (define-innermode poly-liveview-expr-elixir-innermode
+    :mode 'web-mode
+    :head-matcher (rx line-start (* space) "~L" (= 3 (char "\"'")) line-end)
+    :tail-matcher (rx line-start (* space) (= 3 (char "\"'")) line-end)
+    :head-mode 'host
+    :tail-mode 'host
+    :allow-nested nil
+    :keep-in-mode 'host
+    :fallback-mode 'host)
+  (define-polymode poly-elixir-web-mode
+    :hostmode 'poly-elixir-hostmode
+    :innermodes '(poly-liveview-expr-elixir-innermode)))
+
+(after! web-mode
+  (dolist (tuple '(("elixir" . "\\.ex\\'")
+                   ("elixir" . "\\.eex\\'")
+                   ("elixir" . "\\.leex\\'")))
+    (add-to-list 'web-mode-engines-alist tuple)))
+
+;; This is a temporary fix. Doom currently adds support for web-mode in eex
+;; files, but does not yet support leex files. This line can be removed when
+;; they do.
+(add-to-list 'auto-mode-alist '("\\.leex\\'" . web-mode))
+
 (setq tramp-default-method "ssh")
 (setq tramp-terminal-type "tramp")
 
