@@ -314,6 +314,7 @@ Some good themes:
 + better text wrapping
 + setup fonts
 + no line numbers
++ habit support (syncs with [[https://xenodium.com/frictionless-org-habits-on-ios/][FlatHabit]])
 
 #+begin_src emacs-lisp
 
