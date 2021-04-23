@@ -63,6 +63,8 @@
 
 (setq display-line-numbers-type 'relative)
 
+(setq-default frame-title-format '(""))
+
 (setq me/fixed-width-font '(:family "FiraCode Nerd Font" :style "Retina")
       me/variable-pitch-font '(:family "Overpass" :style "Regular")
       me/variable-pitch-serif-font '(:family "Bookerly" :style "Regular"))
