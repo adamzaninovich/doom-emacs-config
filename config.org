@@ -307,8 +307,7 @@ Some good themes:
 ** Basic Config
 
 + set org directory and agenda files
-+ DONE add timestamp when finished
-CLOSED: [2021-04-08 Thu 10:45]
++ add timestamp when finished
 + add some org templates (try =<el= =TAB= in insert mode)
 + indent text according to outline structure
 + use variable pitch fonts in org mode
@@ -560,6 +559,8 @@ This takes emacs from freezing up when opening a PDF to rendering it smoothly on
 #+end_src
 
 ** eBooks
+
+Most of this code is for setting the modeline, but it also sets up the nov package to display epub formatted eBooks
 
 #+begin_src emacs-lisp
 
