@@ -103,12 +103,15 @@
                         :height (plist-get face :height))))
 
 (require 'org-tempo)
+(require 'org-habit)
 
 (after! org
   (setq
    org-ellipsis " ▾"
    org-directory "~/projects/org/"
-   org-agenda-files '("~/projects/org/agenda.org" "~/projects/org/todo.org")
+   org-agenda-files '("~/projects/org/agenda.org"
+                      "~/projects/org/todo.org"
+                      "~/Documents/FlatHabits/MyHabits.org")
    org-log-done 'time)
 
   (add-to-list 'org-structure-template-alist '("el"  . "src emacs-lisp"))
