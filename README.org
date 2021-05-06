@@ -20,8 +20,8 @@ This is my personal Doom Emacs configuration. I've been a vim and neovim user fo
 
 This configuration should reflect that, at least a little bit, and will continue to do so even more in the future as I try to whittle down Doom Emacs to a smaller feature set over time.
 
-#+ATTR_ORG: :width 400
-[[./resources/docs/perfection.png]]
+#+ATTR_ORG: :width 600
+[[./resources/docs/perfection-wide.png]]
 
 ** Features
 Here are a few features of this configuration:
