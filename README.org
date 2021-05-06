@@ -4,7 +4,7 @@
 * Table of Contents :TOC_2:noexport:
 - [[#description][Description]]
   - [[#features][Features]]
-- [[#installer][Installer]]
+- [[#installer-macos-only][Installer (macOS only!)]]
 - [[#prerequisites][Prerequisites]]
   - [[#installing-emacs-on-macos-with-homebrew][Installing Emacs on macOS with Homebrew]]
   - [[#fonts][Fonts]]
@@ -13,6 +13,8 @@
 - [[#troubleshooting][Troubleshooting]]
 
 * Description
+
+Right off the bat, know that this is only tested on macOS (specifically the latest Big Sur on a M1 Macbook Air). There are many things specific to macOS, especailly the installer.
 
 This is my personal Doom Emacs configuration. I've been a vim and neovim user for many years focusing on the core set of vim features with minimal use of plugins (yeah, I know, this is a big change).
 
@@ -34,9 +36,12 @@ Here are a few features of this configuration:
 - Elixir Language Server support
   + This requires additional setup, see [[#setup-elixir-ls][Setup Elixir LS]] below
   + I'm still debating the benefits of the full language server verses just using [[https://github.com/tonini/alchemist.el][Alchemist]] which still provides quite a bit more functionality than I'm used to in my vim setup (which is basically only syntax highlighting and autoformatting)
-  + If you don't want to use the language server, simple change ~(elixir +lsp)~ to ~elixir~ in ~init.el~ and this will use [[https://github.com/tonini/alchemist.el][Alchemist]] instead
+  + If you don't want to use the language server, simple change ~(elixir +lsp)~ to ~elixir~ in the init section of ~config.org~ and it will use [[https://github.com/tonini/alchemist.el][Alchemist]] instead
 - Vim Vinegar style =-= keybinding to open Dired
-* Installer
+- PDF and eBook support
+- And more
+
+* Installer (macOS only!)
 
 If you want to install everything automatically, just clone this repo to ~~/.config/doom~, cd into it, and run ~bash install.sh~. Installation includes compiling emacs from scratch so it can take 15-30 minutes. The installer is safe and mostly idempotent (in the ways that count). You can also follow along by hand if you want in ~install.org~.
 
@@ -99,6 +104,7 @@ doom env
 
 *** Activate lsp and elixir with lsp support
 In [[file:init.el][init.el]] make sure that =lsp= is active as well as elixir's lsp flag =(elixir +lsp)=
+
 *** Sync doom to install packages
 
 #+begin_src shell
@@ -108,6 +114,7 @@ doom sync
 *** Restart emacs
 Open an elixir project and look for the 🚀 in your status bar
 If you need to troubleshoot, use =SPC b B= and open =*lsp-log*= to see any error messages
+
 *** Additional config
 I have turned off lsp file watching in [[file:config.el][config.el]] since I was tired of it asking every time I opened a large project. Turn it back on if you want
 A better way would be to figure out how to get it to ignore certain files (like node dependencies, for instance), but I haven't gotten around to that yet
