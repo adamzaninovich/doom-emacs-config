@@ -202,7 +202,7 @@ Turn on Auto Revert Mode globally. This will automatically refresh the buffer wh
 
 Setup some basic UI defaults
 
-+ Start maximized
++ Start with a set size and position
 + No minimal window chrome
 + Relative line numbers
 + No frame title text
