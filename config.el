@@ -53,7 +53,10 @@
 
 (global-auto-revert-mode t)
 
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+(add-to-list 'initial-frame-alist '(width . (text-pixels . 1180)))
+(add-to-list 'initial-frame-alist '(height . (text-pixels . 780)))
+(add-to-list 'initial-frame-alist '(top . 50))
+(add-to-list 'initial-frame-alist '(left . 45))
 
 (after! doom-ui
   (scroll-bar-mode -1)
