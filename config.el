@@ -75,6 +75,9 @@
 (setq me/org-font-family (plist-get me/variable-pitch-font :family)
       me/ebook-font-family (plist-get me/variable-pitch-serif-font :family))
 
+(setq doom-emoji-fallback-font-families nil)
+(setq doom-symbol-fallback-font-families nil)
+
 (setq doom-font
       (font-spec :family (plist-get me/fixed-width-font :family)
                  :style  (plist-get me/fixed-width-font :style)
