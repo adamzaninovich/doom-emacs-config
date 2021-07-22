@@ -549,7 +549,7 @@ Disable evil-snipe mode so that =S= and =s= work as they do in vim
 
 #+begin_src emacs-lisp
 
-(after! evil-snipe (evil-snipe-mode -1))
+(remove-hook 'doom-first-input-hook #'evil-snipe-mode)
 
 #+end_src
 

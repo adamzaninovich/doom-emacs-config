@@ -224,7 +224,7 @@
   (setq projectile-ignored-projects '("~/" "/tmp/" "~/.emacs.d/" "/opt/homebrew/"))
   (setq projectile-project-search-path '("~/projects/" "~/campaigns/")))
 
-(after! evil-snipe (evil-snipe-mode -1))
+(remove-hook 'doom-first-input-hook #'evil-snipe-mode)
 
 (use-package! pdf-tools
   :defer t
