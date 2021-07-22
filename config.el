@@ -221,6 +221,9 @@
 (setq lsp-enable-file-watchers nil)
 
 (after! projectile
+  (add-hook 'projectile-after-switch-project-hook (lambda ()
+        (if (s-suffix? "printserver/" (projectile-project-root))
+            (setq-local lsp-elixir-project-dir "printserver/packages/ex_printserver/"))))
   (setq projectile-ignored-projects '("~/" "/tmp/" "~/.emacs.d/" "/opt/homebrew/"))
   (setq projectile-project-search-path '("~/projects/" "~/campaigns/")))
 
