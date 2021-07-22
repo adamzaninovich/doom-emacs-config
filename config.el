@@ -93,6 +93,60 @@
 
 (setq doom-theme 'doom-palenight)
 
+(defun me/setup-indent (n)
+  ;; java/c/c++
+  (setq-local c-basic-offset n)
+
+  ;; shell
+  (setq-local sh-set-indent n)
+
+  ;; web development
+  (setq-local coffee-tab-width n) ; coffeescript
+  (setq-local javascript-indent-level n) ; javascript-mode
+  (setq-local js-indent-level n) ; js-mode
+  (setq-local js2-basic-offset n) ; js2-mode, in latest js2-mode, it's alias of js-indent-level
+  (setq-local web-mode-markup-indent-offset n) ; web-mode, html tag in html file
+  (setq-local web-mode-css-indent-offset n) ; web-mode, css in html file
+  (setq-local web-mode-code-indent-offset n) ; web-mode, js code in html file
+  (setq-local css-indent-offset n) ; css-mode
+  )
+
+(defun me/office-code-style ()
+  (interactive)
+  (message "Office code style!")
+  ;; use tab instead of space
+  (setq-local indent-tabs-mode t)
+  ;; indent 4 spaces width
+  (me/setup-indent 4))
+
+(defun me/personal-code-style ()
+  (interactive)
+  (message "My personal code style!")
+  ;; use space instead of tab
+  (setq indent-tabs-mode nil)
+  ;; indent 2 spaces width
+  (me/setup-indent 2))
+
+(defun me/setup-develop-environment ()
+  (interactive)
+  (me/personal-code-style))
+
+;; How to do this dynamically based on project name:
+;; (defun me/setup-develop-environment ()
+;;   (interactive)
+;;   (let ((proj-dir (file-name-directory (buffer-file-name))))
+;;     ;; if hobby project path contains string "hobby-proj1"
+;;     (if (string-match-p "hobby-proj1" proj-dir)
+;;         (me/personal-code-style))
+;;     ;; if commericial project path contains string "commerical-proj"
+;;     (if (string-match-p "commerical-proj" proj-dir)
+;;         (me/office-code-style))))
+
+;; prog-mode-hook requires emacs24+
+(add-hook 'prog-mode-hook 'me/setup-develop-environment)
+;; a few major-modes does NOT inherited from prog-mode
+(add-hook 'web-mode-hook 'me/setup-develop-environment)
+
 (defun me/org-font-setup ()
   (dolist (face '((:name org-level-1 :weight bold   :height 1.3)
                   (:name org-level-2 :weight bold   :height 1.2)
