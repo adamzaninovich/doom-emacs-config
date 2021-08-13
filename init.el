@@ -152,6 +152,7 @@
        (org                ; organize your plain life in plain text
         +capture           ; org-capture in and outside of Emacs
         +pretty
+        +roam
         ;; +attach         ; custom attachment system
         +babel             ; running code in org
         +export            ; Exporting org to whatever you want

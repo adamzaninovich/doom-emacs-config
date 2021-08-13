@@ -26,6 +26,7 @@
   - [[#doom-modeline][Doom Modeline]]
   - [[#evil][EVIL]]
   - [[#magit][Magit]]
+  - [[#org-roam][Org Roam]]
   - [[#flycheck][Flycheck]]
   - [[#treemacs][Treemacs]]
   - [[#tabs][Tabs]]
@@ -504,6 +505,18 @@ I don’t use evil-escape-mode, so I may as well turn it off, I’ve heard it co
 (setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     "))
 
 #+END_SRC
+
+** Org Roam
+
+#+begin_src emacs-lisp
+
+(use-package! org-roam
+  :defer t
+  :init
+  (setq org-roam-directory "~/Documents/OrgRoam")
+  (setq +org-roam-open-buffer-on-find-file nil))
+
+#+end_src
 
 ** Flycheck
 
