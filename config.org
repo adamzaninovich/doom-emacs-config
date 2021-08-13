@@ -29,11 +29,12 @@
   - [[#flycheck][Flycheck]]
   - [[#treemacs][Treemacs]]
   - [[#tabs][Tabs]]
-  - [[#lsp][LSP]]
   - [[#projectile][Projectile]]
   - [[#evil-snipe][Evil-Snipe]]
   - [[#pdfs][PDFs]]
   - [[#ebooks][eBooks]]
+  - [[#lsp][LSP]]
+  - [[#company][Company]]
   - [[#elixir][Elixir]]
 - [[#tramp][Tramp]]
 - [[#key-bindings][Key Bindings]]
@@ -580,16 +581,6 @@ Sets up tab grouping by:
 
 #+end_src
 
-** LSP
-
-Do not watch files because it's annoying when it asks every time
-
-#+begin_src emacs-lisp
-
-(setq lsp-enable-file-watchers nil)
-
-#+end_src
-
 ** Projectile
 
 Set projectile ignored projects
@@ -715,6 +706,25 @@ Most of this code is for setting the modeline, but it also sets up the nov packa
   (add-hook 'nov-mode-hook #'+nov-mode-setup))
 
 #+end_src
+
+** LSP
+
+Do not watch files because it's annoying when it asks every time
+
+#+begin_src emacs-lisp
+
+(setq lsp-enable-file-watchers nil)
+
+#+end_src
+
+** Company
+
+#+begin_src emacs-lisp
+
+(setq company-idle-delay 0.5)
+
+#+end_src
+
 
 ** Elixir
 

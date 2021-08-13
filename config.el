@@ -272,8 +272,6 @@
        (centaur-tabs-get-group-name (current-buffer))))))
   )
 
-(setq lsp-enable-file-watchers nil)
-
 (after! projectile
   (add-hook 'projectile-after-switch-project-hook (lambda ()
         (if (s-suffix? "printserver/" (projectile-project-root))
@@ -364,6 +362,10 @@
     (nov-render-document))
 
   (add-hook 'nov-mode-hook #'+nov-mode-setup))
+
+(setq lsp-enable-file-watchers nil)
+
+(setq company-idle-delay 0.5)
 
 ;; Enable format and iex reload on save
 (after! lsp
