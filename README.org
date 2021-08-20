@@ -1,4 +1,4 @@
-#+title:   Adam's Doom Emacs Configuration
+#+title:   DOOM Vimacs GNU run free run GNU DRM FREE EMACS
 #+author:  Adam Zaninovich
 
 * Table of Contents :TOC_2:noexport:
