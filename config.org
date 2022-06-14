@@ -66,6 +66,8 @@ Add ~package!~ directives here, and ~packages.el~ will be generated from this se
 (package! pdf-tools)
 (package! nov)
 (package! polymode)
+(package! terraform-mode)
+(package! zig-mode)
 
 #+end_src
 

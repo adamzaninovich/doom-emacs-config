@@ -14,3 +14,5 @@
 (package! pdf-tools)
 (package! nov)
 (package! polymode)
+(package! terraform-mode)
+(package! zig-mode)
