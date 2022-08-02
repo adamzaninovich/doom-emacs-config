@@ -151,7 +151,7 @@ fi
 if [[ $install_emacs = "yes" ]]; then
   ohai "Installing Emacs. This might take a while..."
   brew tap d12frosted/emacs-plus
-  brew install emacs-plus@28 --with-nobu417-big-sur-icon
+  brew install emacs-plus@28 --with-nobu417-big-sur-icon --with-native-comp
   ohai "Copying to /Applications..."
   \cp -ri "$(brew --prefix)/opt/emacs-plus@28/Emacs.app" /Applications/Emacs.app
 fi

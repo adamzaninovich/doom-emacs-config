@@ -228,11 +228,11 @@
 
 (setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     "))
 
-(use-package! org-roam
-  :defer t
-  :init
-  (setq org-roam-directory "~/Documents/OrgRoam")
-  (setq +org-roam-open-buffer-on-find-file nil))
+;; (use-package! org-roam
+;;   :defer t
+;;   :init
+;;   (setq org-roam-directory "~/Documents/OrgRoam")
+;;   (setq +org-roam-open-buffer-on-find-file nil))
 
 (setq-default flycheck-disabled-checkers '(proselint))
 

@@ -26,7 +26,7 @@
   - [[#doom-modeline][Doom Modeline]]
   - [[#evil][EVIL]]
   - [[#magit][Magit]]
-  - [[#org-roam][Org Roam]]
+  - [[#org-roam-not-using][Org Roam (not using)]]
   - [[#flycheck][Flycheck]]
   - [[#treemacs][Treemacs]]
   - [[#tabs][Tabs]]
@@ -508,15 +508,15 @@ I don’t use evil-escape-mode, so I may as well turn it off, I’ve heard it co
 
 #+END_SRC
 
-** Org Roam
+** Org Roam (not using)
 
 #+begin_src emacs-lisp
 
-(use-package! org-roam
-  :defer t
-  :init
-  (setq org-roam-directory "~/Documents/OrgRoam")
-  (setq +org-roam-open-buffer-on-find-file nil))
+;; (use-package! org-roam
+;;   :defer t
+;;   :init
+;;   (setq org-roam-directory "~/Documents/OrgRoam")
+;;   (setq +org-roam-open-buffer-on-find-file nil))
 
 #+end_src
 
