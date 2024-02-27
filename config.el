@@ -40,6 +40,8 @@
        (substitute-in-file-name
         "$HOME/.config/doom/resources/messages.txt")))
 
+(doom-load-envvars-file "~/.emacs.d/.local/doom_only_env")
+
 (setq-default delete-by-moving-to-trash t
               window-combination-resize t
               x-stretch-cursor t)
@@ -61,14 +63,13 @@
 (after! doom-ui
   (scroll-bar-mode -1)
   (tool-bar-mode -1)
-  (tooltip-mode -1)
-  (menu-bar-mode -1))
+  (tooltip-mode -1))
 
 (setq display-line-numbers-type 'relative)
 
 (setq-default frame-title-format '(""))
 
-(setq me/fixed-width-font '(:family "FiraCode Nerd Font" :style "Retina")
+(setq me/fixed-width-font '(:family "ComicCodeLigatures Nerd Font" :style "Medium")
       me/variable-pitch-font '(:family "Overpass" :style "Regular")
       me/variable-pitch-serif-font '(:family "Bookerly" :style "Regular"))
 
@@ -250,34 +251,37 @@
    centaur-tabs-bar-height 30
    centaur-tabs-height 28)
 
-  (centaur-tabs-change-fonts (plist-get me/variable-pitch-font :family) 150)
+  (centaur-tabs-change-fonts (plist-get me/fixed-width-font :family) 130)
 
-  ;; (defun centaur-tabs-buffer-groups ()
-  ;;   "`centaur-tabs-buffer-groups' control buffers' group rules.
+  (defun centaur-tabs-hide-tab (x)
+    "Do no to show buffer X in tabs."
+    (let ((name (format "%s" x)))
+        (or
+        ;; Current window is not dedicated window.
+        (window-dedicated-p (selected-window))
 
-  ;;   Group centaur-tabs with mode if buffer is derived from `eshell-mode'
-  ;;   `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
-  ;;   All buffer name start with * will group to \"Emacs\".
-  ;;   Other buffer group by `centaur-tabs-get-group-name' with project name."
-  ;;   (list
-  ;;    (cond
-  ;;     ((or (string-equal "*" (substring (buffer-name) 0 1))
-  ;;          (memq major-mode '(magit-process-mode
-  ;;                             magit-status-mode
-  ;;                             magit-diff-mode
-  ;;                             magit-log-mode
-  ;;                             magit-file-mode
-  ;;                             magit-blob-mode
-  ;;                             magit-blame-mode
-  ;;                             )))
-  ;;      "Emacs")
-  ;;     ((derived-mode-p 'eshell-mode) "EShell")
-  ;;     ((derived-mode-p 'dired-mode) "Dired")
-  ;;     ;; ((derived-mode-p 'emacs-lisp-mode) "Elisp")
-  ;;     ;; ((memq major-mode '(org-mode org-agenda-mode diary-mode)) "OrgMode")
-  ;;     (t
-  ;;      (centaur-tabs-get-group-name (current-buffer))))))
-  )
+        ;; Buffer name not match below blacklist.
+        (string-suffix-p "ex[web]" name)
+        (string-prefix-p "*epc" name)
+        (string-prefix-p "*helm" name)
+        (string-prefix-p "*Helm" name)
+        (string-prefix-p "*Compile-Log*" name)
+        (string-prefix-p "*lsp" name)
+        (string-prefix-p "*company" name)
+        (string-prefix-p "*Flycheck" name)
+        (string-prefix-p "*tramp" name)
+        (string-prefix-p " *Mini" name)
+        (string-prefix-p "*help" name)
+        (string-prefix-p "*straight" name)
+        (string-prefix-p " *temp" name)
+        (string-prefix-p "*Help" name)
+        (string-prefix-p "*mybuf" name)
+
+        ;; Is not magit buffer.
+        (and (string-prefix-p "magit" name)
+            (not (file-name-extension name)))
+        )))
+)
 
 (after! projectile
   (add-hook 'projectile-after-switch-project-hook (lambda ()
@@ -375,18 +379,10 @@
 (setq company-idle-delay 0.5)
 
 ;; Enable format and iex reload on save
-(after! lsp
-  (add-hook 'elixir-mode-hook
-            (lambda ()
-              (add-hook 'before-save-hook 'elixir-format nil t)
-              (add-hook 'after-save-hook 'alchemist-iex-reload-module))))
-
-;; (add-hook 'elixir-format-hook (lambda ()
-;;                                 (if (projectile-project-p)
-;;                                     (setq elixir-format-arguments
-;;                                           (list "--dot-formatter"
-;;                                                 (concat (locate-dominating-file buffer-file-name ".formatter.exs") ".formatter.exs")))
-;;                                   (setq elixir-format-arguments nil))))
+(add-hook 'elixir-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'elixir-format nil t)
+            (add-hook 'after-save-hook 'alchemist-iex-reload-module)))
 
 (use-package! polymode
   :mode ("\.ex$" . poly-elixir-web-mode)
@@ -394,7 +390,7 @@
   (define-hostmode poly-elixir-hostmode :mode 'elixir-mode)
   (define-innermode poly-liveview-expr-elixir-innermode
     :mode 'web-mode
-    :head-matcher (rx line-start (* space) "~L" (= 3 (char "\"'")) line-end)
+    :head-matcher (rx line-start (* space) "~H" (= 3 (char "\"'")) line-end)
     :tail-matcher (rx line-start (* space) (= 3 (char "\"'")) line-end)
     :head-mode 'host
     :tail-mode 'host
@@ -408,13 +404,13 @@
 (after! web-mode
   (dolist (tuple '(("elixir" . "\\.ex\\'")
                    ("elixir" . "\\.eex\\'")
-                   ("elixir" . "\\.leex\\'")))
+                   ("elixir" . "\\.heex\\'")))
     (add-to-list 'web-mode-engines-alist tuple)))
 
 ;; This is a temporary fix. Doom currently adds support for web-mode in eex
-;; files, but does not yet support leex files. This line can be removed when
+;; files, but does not yet support heex files. This line can be removed when
 ;; they do.
-(add-to-list 'auto-mode-alist '("\\.leex\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.heex\\'" . web-mode))
 
 (setq tramp-default-method "ssh")
 (setq tramp-terminal-type "tramp")
