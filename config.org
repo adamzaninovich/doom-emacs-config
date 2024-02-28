@@ -765,6 +765,38 @@ Create a buffer-local hook to run elixir-format on save, only when we enable eli
 
 #+end_src
 
+*** Setup heex-mode using tree-sitter
+
+#+begin_src emacs-lisp
+
+;; (define-derived-mode heex-mode web-mode "HEEx"
+;;                      "Major mode for editing HEEx files")
+;; (add-to-list 'auto-mode-alist '("\\.heex?\\'" . heex-mode))
+
+;; (use-package tree-sitter
+;;   :hook (prog-mode . (lambda ()
+;;                         (require 'tree-sitter)
+;;                         (require 'tree-sitter-langs)
+;;                         (require 'tree-sitter-hl)
+;;                         (tree-sitter-hl-mode)
+;;                      ))
+;;   :config
+;;   ;; Directory to store grammers custom into
+;;   (add-to-list 'tree-sitter-load-path (file-name-as-directory "~/.local/share/tree-sitter/"))
+
+;;   ;; Add HEEx for tree-sitter:
+;;   ;; 0. npm install -g tree-sitter-cli
+;;   ;; 1. git clone https://github.com/phoenixframework/tree-sitter-heex.git
+;;   ;; 2. gcc -shared -fPIC -g -O2 -I src src/parser.c -o ./heex.so -target aarch64-apple-darwin
+;;   ;; 3. cp ./heex.so ~/.local/share/tree-sitter/
+;;   (tree-sitter-load 'heex)
+;;   (add-to-list 'tree-sitter-major-mode-language-alist '(heex-mode . heex))
+;; )
+
+;; (use-package tree-sitter-langs)
+
+#+end_src
+
 *** Setup Ploymode with Elixir and Web Mode
 
 This sets up support for webmode inside of =~H= Liveview eex sigils in Elixir files as well as support for ~.heex~ template files
@@ -793,11 +825,6 @@ This sets up support for webmode inside of =~H= Liveview eex sigils in Elixir fi
                    ("elixir" . "\\.eex\\'")
                    ("elixir" . "\\.heex\\'")))
     (add-to-list 'web-mode-engines-alist tuple)))
-
-;; This is a temporary fix. Doom currently adds support for web-mode in eex
-;; files, but does not yet support heex files. This line can be removed when
-;; they do.
-(add-to-list 'auto-mode-alist '("\\.heex\\'" . web-mode))
 
 #+end_src
 

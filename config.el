@@ -384,6 +384,32 @@
             (add-hook 'before-save-hook 'elixir-format nil t)
             (add-hook 'after-save-hook 'alchemist-iex-reload-module)))
 
+;; (define-derived-mode heex-mode web-mode "HEEx"
+;;                      "Major mode for editing HEEx files")
+;; (add-to-list 'auto-mode-alist '("\\.heex?\\'" . heex-mode))
+
+;; (use-package tree-sitter
+;;   :hook (prog-mode . (lambda ()
+;;                         (require 'tree-sitter)
+;;                         (require 'tree-sitter-langs)
+;;                         (require 'tree-sitter-hl)
+;;                         (tree-sitter-hl-mode)
+;;                      ))
+;;   :config
+;;   ;; Directory to store grammers custom into
+;;   (add-to-list 'tree-sitter-load-path (file-name-as-directory "~/.local/share/tree-sitter/"))
+
+;;   ;; Add HEEx for tree-sitter:
+;;   ;; 0. npm install -g tree-sitter-cli
+;;   ;; 1. git clone https://github.com/phoenixframework/tree-sitter-heex.git
+;;   ;; 2. gcc -shared -fPIC -g -O2 -I src src/parser.c -o ./heex.so -target aarch64-apple-darwin
+;;   ;; 3. cp ./heex.so ~/.local/share/tree-sitter/
+;;   (tree-sitter-load 'heex)
+;;   (add-to-list 'tree-sitter-major-mode-language-alist '(heex-mode . heex))
+;; )
+
+;; (use-package tree-sitter-langs)
+
 (use-package! polymode
   :mode ("\.ex$" . poly-elixir-web-mode)
   :config
@@ -406,11 +432,6 @@
                    ("elixir" . "\\.eex\\'")
                    ("elixir" . "\\.heex\\'")))
     (add-to-list 'web-mode-engines-alist tuple)))
-
-;; This is a temporary fix. Doom currently adds support for web-mode in eex
-;; files, but does not yet support heex files. This line can be removed when
-;; they do.
-(add-to-list 'auto-mode-alist '("\\.heex\\'" . web-mode))
 
 (setq tramp-default-method "ssh")
 (setq tramp-terminal-type "tramp")
