@@ -69,7 +69,7 @@
 
 (setq-default frame-title-format '(""))
 
-(setq me/fixed-width-font '(:family "ComicCodeLigatures Nerd Font" :style "Medium")
+(setq me/fixed-width-font '(:family "ComicCode Nerd Font" :style "Medium")
       me/variable-pitch-font '(:family "Overpass" :style "Regular")
       me/variable-pitch-serif-font '(:family "Bookerly" :style "Regular"))
 
