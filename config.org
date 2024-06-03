@@ -255,7 +255,6 @@ Download fonts
 + [[https://the-digital-reader.com/wp-content/uploads/2016/04/Ember-bookerly.zip][Bookerly]] (Amazon's latest and best eBook/Kindle font)
 
 #+begin_src emacs-lisp
-
 (setq me/fixed-width-font '(:family "ComicCode Nerd Font" :style "Medium")
       me/variable-pitch-font '(:family "Overpass" :style "Regular")
       me/variable-pitch-serif-font '(:family "Bookerly" :style "Regular"))
@@ -803,28 +802,28 @@ This sets up support for webmode inside of =~H= Liveview eex sigils in Elixir fi
 
 #+begin_src emacs-lisp
 
-(use-package! polymode
-  :mode ("\.ex$" . poly-elixir-web-mode)
-  :config
-  (define-hostmode poly-elixir-hostmode :mode 'elixir-mode)
-  (define-innermode poly-liveview-expr-elixir-innermode
-    :mode 'web-mode
-    :head-matcher (rx line-start (* space) "~H" (= 3 (char "\"'")) line-end)
-    :tail-matcher (rx line-start (* space) (= 3 (char "\"'")) line-end)
-    :head-mode 'host
-    :tail-mode 'host
-    :allow-nested nil
-    :keep-in-mode 'host
-    :fallback-mode 'host)
-  (define-polymode poly-elixir-web-mode
-    :hostmode 'poly-elixir-hostmode
-    :innermodes '(poly-liveview-expr-elixir-innermode)))
+;; (use-package! polymode
+;;   :mode ("\.ex$" . poly-elixir-web-mode)
+;;   :config
+;;   (define-hostmode poly-elixir-hostmode :mode 'elixir-mode)
+;;   (define-innermode poly-liveview-expr-elixir-innermode
+;;     :mode 'web-mode
+;;     :head-matcher (rx line-start (* space) "~H" (= 3 (char "\"'")) line-end)
+;;     :tail-matcher (rx line-start (* space) (= 3 (char "\"'")) line-end)
+;;     :head-mode 'host
+;;     :tail-mode 'host
+;;     :allow-nested nil
+;;     :keep-in-mode 'host
+;;     :fallback-mode 'host)
+;;   (define-polymode poly-elixir-web-mode
+;;     :hostmode 'poly-elixir-hostmode
+;;     :innermodes '(poly-liveview-expr-elixir-innermode)))
 
-(after! web-mode
-  (dolist (tuple '(("elixir" . "\\.ex\\'")
-                   ("elixir" . "\\.eex\\'")
-                   ("elixir" . "\\.heex\\'")))
-    (add-to-list 'web-mode-engines-alist tuple)))
+;; (after! web-mode
+;;   (dolist (tuple '(("elixir" . "\\.ex\\'")
+;;                    ("elixir" . "\\.eex\\'")
+;;                    ("elixir" . "\\.heex\\'")))
+;;     (add-to-list 'web-mode-engines-alist tuple)))
 
 #+end_src
 
