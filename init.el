@@ -87,7 +87,7 @@
        ;;grammar           ; tasing grammar mistake every you make
 
        :tools
-       ansible
+       ;;ansible
        ;;debugger          ; FIXME stepping through code, to help you add bugs
        ;;direnv
        docker
@@ -96,6 +96,7 @@
        (eval +overlay)     ; run code, run (also, repls)
        ;;gist              ; interacting with github gists
        lookup              ; navigate your code and its documentation
+       ;;(lsp +peek)
        ;;lsp
        magit               ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
@@ -123,6 +124,7 @@
        data                ; config/data formats
        ;;(dart +flutter)   ; paint ui and not much else
        elixir              ; erlang done right
+       ;;(elixir +lsp)              ; erlang done right
        ;;elm               ; care for a cup of TEA?
        emacs-lisp          ; drown in parentheses
        erlang              ; an elegant language for a more civilized age

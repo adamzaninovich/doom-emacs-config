@@ -299,118 +299,74 @@
   (setq pdf-view-use-scaling t
         pdf-view-use-imagemagick nil))
 
-(use-package! nov
-  :mode ("\\.epub\\'" . nov-mode)
-  :config
-  (map! :map nov-mode-map
-        :n "R" #'nov-render-document
-        :n "RET" #'nov-scroll-up)
-
-  (defun doom-modeline-segment--nov-info ()
-    (concat
-     " "
-     (propertize
-      (cdr (assoc 'creator nov-metadata))
-      'face 'doom-modeline-project-parent-dir)
-     " "
-     (cdr (assoc 'title nov-metadata))
-     " "
-     (propertize
-      (format "%d/%d"
-              (1+ nov-documents-index)
-              (length nov-documents))
-      'face 'doom-modeline-info)))
-
-  (advice-add 'nov-render-title :override #'ignore)
-
-  (defun +nov-mode-setup ()
-    (face-remap-add-relative 'variable-pitch
-                             :family me/ebook-font-family
-                             :height 1.1
-                             :width 'semi-expanded)
-    (face-remap-add-relative 'default :height 1.1)
-    (setq-local line-spacing 0.2
-                next-screen-context-lines 4
-                shr-use-colors nil)
-    ;; (require 'visual-fill-column nil t)
-    (setq-local visual-fill-column-center-text t
-                visual-fill-column-width 100
-                nov-text-width 90)
-    (visual-fill-column-mode 1)
-    (hl-line-mode -1)
-
-    (add-to-list '+lookup-definition-functions #'+lookup/dictionary-definition)
-
-    (setq-local mode-line-format
-                `((:eval
-                   (doom-modeline-segment--workspace-name))
-                  (:eval
-                   (doom-modeline-segment--window-number))
-                  (:eval
-                   (doom-modeline-segment--nov-info))
-                  ,(propertize
-                    " %P "
-                    'face 'doom-modeline-buffer-minor-mode)
-                  (:eval
-                   (doom-modeline-segment--misc-info))
-                  (:eval
-                   (doom-modeline-segment--battery))
-                  ,(propertize
-                    " "
-                    'face (if (doom-modeline--active) 'mode-line 'mode-line-inactive)
-                    'display `((space
-                                :align-to
-                                (- (+ right right-fringe right-margin)
-                                   ,(* (let ((width (doom-modeline--font-width)))
-                                         (or (and (= width 1) 1)
-                                             (/ width (frame-char-width) 1.0)))
-                                       (string-width
-                                        (format-mode-line (cons "" '(:eval (doom-modeline-segment--major-mode))))))))))
-                  (:eval
-                   (doom-modeline-segment--major-mode))
-                  ))
-
-    (nov-render-document))
-
-  (add-hook 'nov-mode-hook #'+nov-mode-setup))
-
 (setq lsp-enable-file-watchers nil)
 
 (setq company-idle-delay 0.5)
+
+;; experimental treesitter setup
+
+;; (use-package
+;;   emacs
+;;   :ensure nil
+;;   :custom
+
+;;   ;; Should use:
+;;   ;; (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist)) ;
+;;   ;; at least once per installation or while changing this list
+;;   (treesit-language-source-alist
+;;    '((heex "https://github.com/phoenixframework/tree-sitter-heex")
+;;      (elixir "https://github.com/elixir-lang/tree-sitter-elixir")))
+;;   (major-mode-remap-alist
+;;    '((elixir-mode . elixir-ts-mode)))
+;; )
+
+;; (use-package
+;;  eglot
+;;  :ensure nil
+;;  :config (add-to-list 'eglot-server-programs '(elixir-ts-mode "language_server.sh")))
+
+;; (use-package
+;;  eglot
+;;  :ensure nil
+;;  :config
+;;  (add-to-list
+;;   'eglot-server-programs `((elixir-ts-mode heex-ts-mode elixir-mode) . ("language_server.sh"))))
+
+
+;; (use-package
+;;  elixir-ts-mode
+;;  :hook (elixir-ts-mode . eglot-ensure)
+;;  (elixir-ts-mode
+;;   .
+;;   (lambda ()
+;;     (push '(">=" . ?\u2265) prettify-symbols-alist)
+;;     (push '("<=" . ?\u2264) prettify-symbols-alist)
+;;     (push '("!=" . ?\u2260) prettify-symbols-alist)
+;;     (push '("==" . ?\u2A75) prettify-symbols-alist)
+;;     (push '("=~" . ?\u2245) prettify-symbols-alist)
+;;     (push '("<-" . ?\u2190) prettify-symbols-alist)
+;;     (push '("->" . ?\u2192) prettify-symbols-alist)
+;;     (push '("<-" . ?\u2190) prettify-symbols-alist)
+;;     (push '("|>" . ?\u25B7) prettify-symbols-alist)))
+;;  (before-save . eglot-format))
+
+;; bind alchemist keys
+;; (setq alchemist-key-command-prefix (kbd doom-localleader-key))
+
+(map! :after elixir-mode
+      :map elixir-mode-map
+      :localleader
+      :n "f" #'elixir-format)
 
 ;; Enable format and iex reload on save
 (add-hook 'elixir-mode-hook
           (lambda ()
             (add-hook 'before-save-hook 'elixir-format nil t)
-            (add-hook 'after-save-hook 'alchemist-iex-reload-module)))
-
-;; (define-derived-mode heex-mode web-mode "HEEx"
-;;                      "Major mode for editing HEEx files")
-;; (add-to-list 'auto-mode-alist '("\\.heex?\\'" . heex-mode))
-
-;; (use-package tree-sitter
-;;   :hook (prog-mode . (lambda ()
-;;                         (require 'tree-sitter)
-;;                         (require 'tree-sitter-langs)
-;;                         (require 'tree-sitter-hl)
-;;                         (tree-sitter-hl-mode)
-;;                      ))
-;;   :config
-;;   ;; Directory to store grammers custom into
-;;   (add-to-list 'tree-sitter-load-path (file-name-as-directory "~/.local/share/tree-sitter/"))
-
-;;   ;; Add HEEx for tree-sitter:
-;;   ;; 0. npm install -g tree-sitter-cli
-;;   ;; 1. git clone https://github.com/phoenixframework/tree-sitter-heex.git
-;;   ;; 2. gcc -shared -fPIC -g -O2 -I src src/parser.c -o ./heex.so -target aarch64-apple-darwin
-;;   ;; 3. cp ./heex.so ~/.local/share/tree-sitter/
-;;   (tree-sitter-load 'heex)
-;;   (add-to-list 'tree-sitter-major-mode-language-alist '(heex-mode . heex))
-;; )
-
-;; (use-package tree-sitter-langs)
+            ;;(add-hook 'after-save-hook 'alchemist-iex-reload-module)
+            ))
 
 (use-package! polymode
+  :defer t
   :mode ("\.ex$" . poly-elixir-web-mode)
   :config
   (define-hostmode poly-elixir-hostmode :mode 'elixir-mode)
