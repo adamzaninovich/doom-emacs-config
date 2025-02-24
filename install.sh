@@ -134,14 +134,14 @@ install_emacs="no"
 
 if [ -d /Applications/Emacs.app ]; then
   ohai "It looks like Emacs.app is already installed"
-  if confirm_n "Do you want to back it up and install Emacs Plus 28?"; then
+  if confirm_n "Do you want to back it up and install Emacs Plus 29?"; then
     test -d /Applications/Emacs-Backup.app && abort "Backup already exists"
     \mv -iv /Applications/Emacs.app /Applications/Emacs-Backup.app
     install_emacs="yes"
   fi
 else
   ohai "Emacs is not installed. Let's install it before continuing"
-  if confirm_y "Install Emacs Plus 28?"; then
+  if confirm_y "Install Emacs Plus 29?"; then
     install_emacs="yes"
   else
     abort "You must install Emacs before continuing. Install it manually or run this program again."
@@ -151,9 +151,9 @@ fi
 if [[ $install_emacs = "yes" ]]; then
   ohai "Installing Emacs. This might take a while..."
   brew tap d12frosted/emacs-plus
-  brew install emacs-plus@28 --with-nobu417-big-sur-icon
+  brew install emacs-plus@29 --with-nobu417-big-sur-icon --with-native-comp
   ohai "Copying to /Applications..."
-  \cp -ri "$(brew --prefix)/opt/emacs-plus@28/Emacs.app" /Applications/Emacs.app
+  \cp -ri "$(brew --prefix)/opt/emacs-plus@29/Emacs.app" /Applications/Emacs.app
 fi
 
 unset install_emacs

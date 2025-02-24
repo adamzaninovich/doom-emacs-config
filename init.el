@@ -96,8 +96,9 @@
        (eval +overlay)     ; run code, run (also, repls)
        ;;gist              ; interacting with github gists
        lookup              ; navigate your code and its documentation
-       lsp
-       ;;magit               ; a git porcelain for Emacs
+       ;;(lsp +peek)
+       ;;lsp
+       magit               ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
        ;;pdf               ; pdf enhancements
@@ -122,8 +123,8 @@
        ;;csharp            ; unity, .NET, and mono shenanigans
        data                ; config/data formats
        ;;(dart +flutter)   ; paint ui and not much else
-       ;; (elixir +lsp)    ; erlang done right
        elixir              ; erlang done right
+       ;;(elixir +lsp)              ; erlang done right
        ;;elm               ; care for a cup of TEA?
        emacs-lisp          ; drown in parentheses
        erlang              ; an elegant language for a more civilized age
@@ -153,6 +154,7 @@
        (org                ; organize your plain life in plain text
         +capture           ; org-capture in and outside of Emacs
         +pretty
+        ;; +roam
         ;; +attach         ; custom attachment system
         +babel             ; running code in org
         +export            ; Exporting org to whatever you want
@@ -169,7 +171,7 @@
        ;;rest              ; Emacs as a REST client
        ;;rst               ; ReST in peace
        ;;(ruby +rails)     ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
-       rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       rust                ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala             ; java, but good
        ;;scheme            ; a fully conniving family of lisps
        sh                  ; she sells {ba,z,fi}sh shells on the C xor
