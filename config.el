@@ -68,7 +68,7 @@
 
 (setq-default frame-title-format '(""))
 
-(setq me/fixed-width-font '(:family "FiraCode Nerd Font" :style "Retina")
+(setq me/fixed-width-font '(:family "ComicCode Nerd Font Mono" :style "Regular")
       me/variable-pitch-font '(:family "Overpass" :style "Regular")
       me/variable-pitch-serif-font '(:family "Bookerly" :style "Regular"))
 
@@ -98,7 +98,7 @@
   (setq-local c-basic-offset n)
 
   ;; shell
-  (setq-local sh-set-indent n)
+  (setq-local sh-basic-offset n)
 
   ;; web development
   (setq-local coffee-tab-width n) ; coffeescript
@@ -109,6 +109,7 @@
   (setq-local web-mode-css-indent-offset n) ; web-mode, css in html file
   (setq-local web-mode-code-indent-offset n) ; web-mode, js code in html file
   (setq-local css-indent-offset n) ; css-mode
+  (setq-local rustic-mode-indent-offset n) ; css-mode
   )
 
 (defun me/office-code-style ()
@@ -404,6 +405,7 @@
 
 (map! :desc "Open Dired here" :n "-" #'dired-jump)
 
+(map! :desc "Centaur Tabs" :n "SPC t t" #'centaur-tabs-mode)
 (map! :desc "Next Tab" :g "s-}" #'centaur-tabs-forward)
 (map! :desc "Previous Tab" :g "s-{" #'centaur-tabs-backward)
 

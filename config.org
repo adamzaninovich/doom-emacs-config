@@ -6,6 +6,7 @@
 * Table of Contents :TOC_2:noexport:
 - [[#todos][Todos]]
   - [[#figure-out-how-to-make-lsp-ignore-certain-files-so-that-it-can-watch-a-reasonable-amount-of-files-without-asking-or-slowing-things-down][Figure out how to make LSP ignore certain files so that it can watch a reasonable amount of files without asking or slowing things down]]
+  - [[#turn-off-evil-snipe-again][turn off evil snipe again]]
 - [[#packages][Packages]]
 - [[#header][Header]]
 - [[#imports][Imports]]
@@ -42,6 +43,7 @@
 * Todos
 
 ** TODO Figure out how to make LSP ignore certain files so that it can watch a reasonable amount of files without asking or slowing things down
+** TODO turn off evil snipe again
 
 * Packages
 
@@ -64,6 +66,11 @@ Add ~package!~ directives here, and ~packages.el~ will be generated from this se
 (package! pdf-tools)
 (package! nov)
 (package! polymode)
+(package! zig-mode)
+
+(package! gitconfig-mode :recipe (:host github :repo "magit/git-modes" :files ("gitconfig-mode.el")))
+(package! gitignore-mode :recipe (:host github :repo "magit/git-modes" :files ("gitignore-mode.el")))
+
 
 #+end_src
 
@@ -246,7 +253,7 @@ Download fonts
 
 #+begin_src emacs-lisp
 
-(setq me/fixed-width-font '(:family "FiraCode Nerd Font" :style "Retina")
+(setq me/fixed-width-font '(:family "ComicCode Nerd Font Mono" :style "Regular")
       me/variable-pitch-font '(:family "Overpass" :style "Regular")
       me/variable-pitch-serif-font '(:family "Bookerly" :style "Regular"))
 
@@ -296,7 +303,7 @@ Based on [[http://blog.binchen.org/posts/easy-indentation-setup-in-emacs-for-web
   (setq-local c-basic-offset n)
 
   ;; shell
-  (setq-local sh-set-indent n)
+  (setq-local sh-basic-offset n)
 
   ;; web development
   (setq-local coffee-tab-width n) ; coffeescript
@@ -307,6 +314,7 @@ Based on [[http://blog.binchen.org/posts/easy-indentation-setup-in-emacs-for-web
   (setq-local web-mode-css-indent-offset n) ; web-mode, css in html file
   (setq-local web-mode-code-indent-offset n) ; web-mode, js code in html file
   (setq-local css-indent-offset n) ; css-mode
+  (setq-local rustic-mode-indent-offset n) ; css-mode
   )
 
 (defun me/office-code-style ()
@@ -806,6 +814,7 @@ fi
 
 (map! :desc "Open Dired here" :n "-" #'dired-jump)
 
+(map! :desc "Centaur Tabs" :n "SPC t t" #'centaur-tabs-mode)
 (map! :desc "Next Tab" :g "s-}" #'centaur-tabs-forward)
 (map! :desc "Previous Tab" :g "s-{" #'centaur-tabs-backward)
 
