@@ -363,7 +363,10 @@
           (lambda ()
             (add-hook 'before-save-hook 'elixir-format nil t)
             ;;(add-hook 'after-save-hook 'alchemist-iex-reload-module)
+            (delete 'elixir-credo flycheck-checkers)
             ))
+
+(setq buffer-save-without-query t)
 
 (use-package! polymode
   :defer t

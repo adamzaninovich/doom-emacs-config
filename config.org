@@ -737,7 +737,10 @@ Create a buffer-local hook to run elixir-format on save, only when we enable eli
           (lambda ()
             (add-hook 'before-save-hook 'elixir-format nil t)
             ;;(add-hook 'after-save-hook 'alchemist-iex-reload-module)
+            (delete 'elixir-credo flycheck-checkers)
             ))
+
+(setq buffer-save-without-query t)
 
 #+end_src
 
