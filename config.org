@@ -65,6 +65,7 @@ Add ~package!~ directives here, and ~packages.el~ will be generated from this se
 ;(package! some-package)
 
 (package! polymode)
+(package! catppuccin-theme)
 
 ;; (package! gitconfig-mode :recipe (:host github :repo "magit/git-modes" :files ("gitconfig-mode.el")))
 ;; (package! gitignore-mode :recipe (:host github :repo "magit/git-modes" :files ("gitignore-mode.el")))
@@ -294,7 +295,12 @@ Some good themes:
 
 #+begin_src emacs-lisp
 
-(setq doom-theme 'doom-palenight)
+(setq doom-theme 'doom-rose-pine)
+
+;; (use-package! catppuccin-theme
+;;   :init (setq catppuccin-flavor 'mocha)
+;;   :hook (after-init . (lambda () (load-theme 'catppuccin))))
+
 
 #+end_src
 

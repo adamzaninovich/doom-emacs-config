@@ -92,7 +92,11 @@
                  :style  (plist-get me/variable-pitch-font :style)
                  :size   16))
 
-(setq doom-theme 'doom-palenight)
+(setq doom-theme 'doom-rose-pine)
+
+;; (use-package! catppuccin-theme
+;;   :init (setq catppuccin-flavor 'mocha)
+;;   :hook (after-init . (lambda () (load-theme 'catppuccin))))
 
 (defun me/setup-indent (n)
   ;; java/c/c++
