@@ -192,7 +192,7 @@
     (helm-selection :foreground base :weight 'bold :background blue)
 
     ;; Ivy
-    (ivy-current-match :background overlay :distant-foreground fg)
+    (ivy-current-match :background highlightH :distant-foreground fg)
     (ivy-minibuffer-match-face-1 :foreground pine :background nil :weight 'bold)
     (ivy-minibuffer-match-face-2 :foreground iris :background nil :weight 'bold)
     (ivy-minibuffer-match-face-3 :foreground gold :background nil :weight 'bold)

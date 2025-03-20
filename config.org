@@ -295,7 +295,7 @@ Some good themes:
 
 #+begin_src emacs-lisp
 
-(setq doom-theme 'doom-rose-pine)
+(setq doom-theme 'doom-rose-pine-moon)
 
 ;; (use-package! catppuccin-theme
 ;;   :init (setq catppuccin-flavor 'mocha)

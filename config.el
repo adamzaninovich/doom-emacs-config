@@ -92,7 +92,7 @@
                  :style  (plist-get me/variable-pitch-font :style)
                  :size   16))
 
-(setq doom-theme 'doom-rose-pine)
+(setq doom-theme 'doom-rose-pine-moon)
 
 ;; (use-package! catppuccin-theme
 ;;   :init (setq catppuccin-flavor 'mocha)
