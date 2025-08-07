@@ -13,6 +13,7 @@
 
 (package! polymode)
 (package! catppuccin-theme)
+(package! envrc)
 (package! claude-code-ide
   :recipe (:host github :repo "manzaltu/claude-code-ide.el"))
 

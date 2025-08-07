@@ -18,6 +18,7 @@
 - [[#basic-ui-configuration][Basic UI Configuration]]
   - [[#fonts][Fonts]]
   - [[#theme][Theme]]
+- [[#setup-direnv][Setup Direnv]]
 - [[#setup-indent][Setup Indent]]
 - [[#org-mode][Org Mode]]
   - [[#better-font-faces][Better font faces]]
@@ -66,6 +67,7 @@ Add ~package!~ directives here, and ~packages.el~ will be generated from this se
 
 (package! polymode)
 (package! catppuccin-theme)
+(package! envrc)
 (package! claude-code-ide
   :recipe (:host github :repo "manzaltu/claude-code-ide.el"))
 
@@ -260,6 +262,7 @@ Download fonts
 + [[https://the-digital-reader.com/wp-content/uploads/2016/04/Ember-bookerly.zip][Bookerly]] (Amazon's latest and best eBook/Kindle font)
 
 #+begin_src emacs-lisp
+(setq nerd-icons-font-names '("SymbolsNerdFontMono-Regular.ttf"))
 
 (setq me/fixed-width-font '(:family "ComicCode Nerd Font" :style "Medium")
       me/variable-pitch-font '(:family "Overpass" :style "Regular")
@@ -303,6 +306,15 @@ Some good themes:
 ;;   :init (setq catppuccin-flavor 'mocha)
 ;;   :hook (after-init . (lambda () (load-theme 'catppuccin))))
 
+
+#+end_src
+
+* Setup Direnv
+
+#+begin_src emacs-lisp
+
+(use-package! envrc
+  :hook (after-init . envrc-global-mode))
 
 #+end_src
 
@@ -367,7 +379,6 @@ Based on [[http://blog.binchen.org/posts/easy-indentation-setup-in-emacs-for-web
 (add-hook 'web-mode-hook 'me/setup-develop-environment)
 
 #+end_src
-
 * Org Mode
 ** Better font faces
 

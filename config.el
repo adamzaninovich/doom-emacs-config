@@ -69,6 +69,8 @@
 
 (setq-default frame-title-format '(""))
 
+(setq nerd-icons-font-names '("SymbolsNerdFontMono-Regular.ttf"))
+
 (setq me/fixed-width-font '(:family "ComicCode Nerd Font" :style "Medium")
       me/variable-pitch-font '(:family "Overpass" :style "Regular")
       me/variable-pitch-serif-font '(:family "Bookerly" :style "Regular"))
@@ -97,6 +99,9 @@
 ;; (use-package! catppuccin-theme
 ;;   :init (setq catppuccin-flavor 'mocha)
 ;;   :hook (after-init . (lambda () (load-theme 'catppuccin))))
+
+(use-package! envrc
+  :hook (after-init . envrc-global-mode))
 
 (defun me/setup-indent (n)
   ;; java/c/c++
