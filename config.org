@@ -68,6 +68,7 @@ Add ~package!~ directives here, and ~packages.el~ will be generated from this se
 (package! polymode)
 (package! catppuccin-theme)
 (package! envrc)
+(package! eat)
 (package! claude-code-ide
   :recipe (:host github :repo "manzaltu/claude-code-ide.el"))
 
@@ -695,9 +696,16 @@ Do not watch files because it's annoying when it asks every time
 #+begin_src emacs-lisp
 
 (use-package! claude-code-ide
-  :bind ("C-c C-'" . claude-code-ide-menu)
   :config
-  (claude-code-ide-emacs-tools-setup))
+  (claude-code-ide-emacs-tools-setup)
+  ;; Use eat for better rendering but configure window behavior
+  (setq claude-code-ide-terminal-backend 'eat
+        ;; Don't use side window, open in regular window that can be managed
+        claude-code-ide-use-side-window nil))
+
+(map! :leader
+      (:prefix ("a" . "applications")
+       :desc "Claude Code IDE menu" "c" #'claude-code-ide-menu))
 
 #+end_src
 

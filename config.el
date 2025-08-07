@@ -314,9 +314,16 @@
 (setq company-idle-delay 0.5)
 
 (use-package! claude-code-ide
-  :bind ("C-c C-'" . claude-code-ide-menu)
   :config
-  (claude-code-ide-emacs-tools-setup))
+  (claude-code-ide-emacs-tools-setup)
+  ;; Use eat for better rendering but configure window behavior
+  (setq claude-code-ide-terminal-backend 'eat
+        ;; Don't use side window, open in regular window that can be managed
+        claude-code-ide-use-side-window nil))
+
+(map! :leader
+      (:prefix ("a" . "applications")
+       :desc "Claude Code IDE menu" "c" #'claude-code-ide-menu))
 
 ;; experimental treesitter setup
 
