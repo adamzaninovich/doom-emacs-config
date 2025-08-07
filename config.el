@@ -308,6 +308,11 @@
 
 (setq company-idle-delay 0.5)
 
+(use-package! claude-code-ide
+  :bind ("C-c C-'" . claude-code-ide-menu)
+  :config
+  (claude-code-ide-emacs-tools-setup))
+
 ;; experimental treesitter setup
 
 ;; (use-package

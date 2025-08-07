@@ -66,6 +66,8 @@ Add ~package!~ directives here, and ~packages.el~ will be generated from this se
 
 (package! polymode)
 (package! catppuccin-theme)
+(package! claude-code-ide
+  :recipe (:host github :repo "manzaltu/claude-code-ide.el"))
 
 ;; (package! gitconfig-mode :recipe (:host github :repo "magit/git-modes" :files ("gitconfig-mode.el")))
 ;; (package! gitignore-mode :recipe (:host github :repo "magit/git-modes" :files ("gitignore-mode.el")))
@@ -676,6 +678,17 @@ Do not watch files because it's annoying when it asks every time
 
 #+end_src
 
+
+** Claude Code IDE
+
+#+begin_src emacs-lisp
+
+(use-package! claude-code-ide
+  :bind ("C-c C-'" . claude-code-ide-menu)
+  :config
+  (claude-code-ide-emacs-tools-setup))
+
+#+end_src
 
 ** Elixir
 
