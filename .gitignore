@@ -4,3 +4,6 @@ resources/banners/doom\ logos.pxd/*
 config-backup.el
 .DS_Store
 .claude/
+
+# Home Manager sync state files
+.doom-*
