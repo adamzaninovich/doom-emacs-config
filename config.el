@@ -40,8 +40,6 @@
        (substitute-in-file-name
         "$HOME/.config/doom/resources/messages.txt")))
 
-(doom-load-envvars-file "~/.emacs.d/.local/doom_only_env")
-
 (setq-default delete-by-moving-to-trash t
               window-combination-resize t
               x-stretch-cursor t)

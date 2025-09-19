@@ -181,11 +181,8 @@ Sets a random banner on startup - this will select a random banner from ~banners
 * Basic Functionality
 Load custom shell env
 
-#+begin_src emacs-lisp
-
+Disabled:
 (doom-load-envvars-file "~/.emacs.d/.local/doom_only_env")
-
-#+end_src
 
 Set some sensible defaults
 
